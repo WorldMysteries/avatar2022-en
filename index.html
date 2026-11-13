@@ -1,0 +1,1807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AVATAR: THE WAY OF WATER — dive into Pandora</title>
+<meta name="description" content="Unofficial fan site for the film “Avatar: The Way of Water” (2022). The story, the Metkayina and Omatikaya clans, the creatures of Pandora, stills, filming technology and numbers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;800;900&family=Manrope:wght@300;400;500;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style>
+/* ============================================================
+   PALETTE & BASE
+   ============================================================ */
+:root{
+  --abyss:#01121b;
+  --deep:#04222e;
+  --trench:#06303f;
+  --lagoon:#0b6070;
+  --glow:#63f5d8;
+  --glow2:#45d9ff;
+  --bio:#ff5fa2;
+  --amber:#ffb454;
+  --coral:#ff7a4d;
+  --sand:#f2e9dc;
+  --ink:#dceff3;
+  --muted:#84a9b5;
+  --paper:#dbe4e3;
+  --paper-ink:#052530;
+
+  --display:'Unbounded',system-ui,sans-serif;
+  --body:'Manrope',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+
+  --ease:cubic-bezier(.22,.85,.28,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--abyss);
+  color:var(--ink);
+  font-family:var(--body);
+  font-weight:400;
+  line-height:1.6;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--glow);color:#02151d}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+/* scrollbar */
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:#021a24}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--lagoon),#0a3f52);border:2px solid #021a24;border-radius:9px}
+::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,var(--glow2),var(--lagoon))}
+
+/* ============================================================
+   BACKGROUND LAYERS
+   ============================================================ */
+#sea{position:fixed;inset:0;z-index:1;pointer-events:none}
+.bg-grad{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(120% 80% at 78% -10%, #0d5f74 0%, rgba(9,58,74,0) 55%),
+    radial-gradient(90% 60% at 8% 12%, rgba(255,95,162,.10) 0%, rgba(0,0,0,0) 60%),
+    radial-gradient(140% 100% at 50% 120%, #04212c 0%, #010e16 70%),
+    linear-gradient(180deg,#021824 0%, #010f17 45%, #010a10 100%);
+}
+.caustics{
+  position:fixed;inset:-30% -20% auto -20%;height:120vh;z-index:1;pointer-events:none;
+  opacity:.34;mix-blend-mode:screen;
+  background:
+    repeating-radial-gradient(ellipse 60% 40% at 30% 0%, rgba(120,255,235,.14) 0 2px, rgba(120,255,235,0) 2px 90px),
+    repeating-radial-gradient(ellipse 50% 38% at 70% 4%, rgba(90,200,255,.12) 0 2px, rgba(90,200,255,0) 2px 110px);
+  filter:blur(6px);
+  animation:caustic 18s linear infinite alternate;
+}
+@keyframes caustic{
+  0%{transform:translate3d(-3%,-2%,0) scale(1.02) skewX(-2deg);opacity:.22}
+  50%{opacity:.42}
+  100%{transform:translate3d(4%,2%,0) scale(1.08) skewX(3deg);opacity:.26}
+}
+.grain{
+  position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.30;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='.5'/></svg>");
+}
+.vignette{position:fixed;inset:0;z-index:59;pointer-events:none;
+  background:radial-gradient(120% 90% at 50% 40%, rgba(0,0,0,0) 45%, rgba(0,4,8,.55) 100%)}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+.eyebrow{
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--glow);display:flex;align-items:center;gap:.75rem;
+}
+.eyebrow::before{content:"";width:38px;height:1px;background:linear-gradient(90deg,var(--glow),transparent)}
+h1,h2,h3,h4{font-family:var(--display);font-weight:800;line-height:.95;letter-spacing:-.02em;margin:0}
+.sec-title{font-size:clamp(2rem,5.4vw,4.1rem)}
+.sec-title em{font-style:normal;font-weight:300;color:var(--muted)}
+.lead{font-size:clamp(1rem,1.35vw,1.16rem);color:#b7d5dd;max-width:60ch}
+.mono{font-family:var(--mono)}
+.dim{color:var(--muted)}
+
+.wrap{width:min(1320px,92vw);margin-inline:auto}
+section{position:relative;z-index:2}
+
+/* ============================================================
+   REVEAL
+   ============================================================ */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0ms)}
+.rv.in{opacity:1;transform:none}
+.rv-x{opacity:0;transform:translateX(-28px);transition:all 1s var(--ease);transition-delay:var(--d,0ms)}
+.rv-x.in{opacity:1;transform:none}
+.rv-s{opacity:0;transform:scale(.94);transition:all 1s var(--ease);transition-delay:var(--d,0ms)}
+.rv-s.in{opacity:1;transform:none}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  transition:background .5s var(--ease),padding .5s var(--ease),border-color .5s;
+  border-bottom:1px solid transparent;padding:1.1rem 0;
+}
+.nav.stuck{
+  background:rgba(2,17,25,.78);backdrop-filter:blur(14px) saturate(140%);
+  border-bottom:1px solid rgba(99,245,216,.16);padding:.55rem 0;
+}
+.nav-in{display:flex;align-items:center;gap:1.4rem;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:.7rem}
+.brand-mark{width:34px;height:34px;flex:0 0 auto;overflow:visible}
+.brand-mark circle,.brand-mark path{transition:all .5s var(--ease)}
+.brand:hover .brand-mark{transform:rotate(-14deg) scale(1.08)}
+.brand-txt{font-family:var(--display);font-weight:800;font-size:.94rem;letter-spacing:.16em;line-height:1}
+.brand-txt small{display:block;font-family:var(--mono);font-weight:400;font-size:.55rem;letter-spacing:.3em;color:var(--glow);margin-top:.28rem}
+.nav-links{display:flex;gap:.15rem;align-items:center}
+.nav-links a{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:.5rem .68rem;border-radius:2px;color:#a9c9d2;position:relative;transition:color .3s;
+}
+.nav-links a::after{
+  content:"";position:absolute;left:.68rem;right:.68rem;bottom:.28rem;height:1px;
+  background:var(--glow);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);
+}
+.nav-links a:hover{color:#fff}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+.nav-links a.active{color:var(--glow)}
+.nav-tools{display:flex;align-items:center;gap:.6rem}
+.icon-btn{
+  width:38px;height:38px;display:grid;place-items:center;border:1px solid rgba(132,169,181,.35);
+  border-radius:50%;transition:all .35s var(--ease);position:relative;
+}
+.icon-btn:hover{border-color:var(--glow);color:var(--glow);box-shadow:0 0 22px -6px var(--glow)}
+.icon-btn.on{border-color:var(--glow);color:var(--glow);background:rgba(99,245,216,.10)}
+.burger{display:none}
+.mobile-menu{
+  position:fixed;inset:0 0 auto 0;z-index:49;background:rgba(2,18,26,.97);backdrop-filter:blur(18px);
+  padding:6rem 6vw 2.4rem;transform:translateY(-102%);transition:transform .6s var(--ease);
+  border-bottom:1px solid rgba(99,245,216,.2);
+}
+.mobile-menu.open{transform:none}
+.mobile-menu a{display:block;font-family:var(--display);font-weight:600;font-size:1.5rem;padding:.55rem 0;border-bottom:1px solid rgba(132,169,181,.14)}
+.mobile-menu a span{font-family:var(--mono);font-size:.6rem;color:var(--glow);margin-right:.8rem;vertical-align:middle}
+
+/* ============================================================
+   DEPTH GAUGE
+   ============================================================ */
+.depth{
+  position:fixed;left:22px;top:50%;transform:translateY(-50%);z-index:45;
+  display:flex;gap:.85rem;align-items:stretch;pointer-events:none;
+}
+.depth-scale{position:relative;width:2px;height:min(46vh,360px);background:linear-gradient(180deg,rgba(99,245,216,.75),rgba(69,217,255,.25),rgba(255,95,162,.12));border-radius:2px}
+.depth-scale::before,.depth-scale::after{content:"";position:absolute;left:-4px;width:10px;height:1px;background:rgba(132,169,181,.5)}
+.depth-scale::before{top:0}.depth-scale::after{bottom:0}
+.depth-ticks{position:absolute;inset:0;left:-3px}
+.depth-ticks i{position:absolute;left:0;width:8px;height:1px;background:rgba(132,169,181,.42)}
+.depth-marker{
+  position:absolute;left:50%;top:0;transform:translate(-50%,-50%);
+  width:14px;height:14px;border-radius:50%;background:var(--glow);
+  box-shadow:0 0 0 4px rgba(99,245,216,.16),0 0 26px 4px rgba(99,245,216,.55);
+  transition:top .18s linear;
+}
+.depth-info{display:flex;flex-direction:column;justify-content:space-between;padding:.2rem 0}
+.depth-num{font-family:var(--display);font-weight:800;font-size:1.5rem;line-height:1;color:#eafcff;text-shadow:0 0 22px rgba(99,245,216,.45)}
+.depth-num sup{font-family:var(--mono);font-size:.55rem;font-weight:400;color:var(--glow);margin-left:.2rem;letter-spacing:.1em}
+.depth-zone{font-family:var(--mono);font-size:.56rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl;transform:rotate(180deg);margin-inline:auto}
+
+/* ============================================================
+   HERO / DESCENT
+   ============================================================ */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:8rem 0 0;overflow:hidden}
+.hero-media{position:absolute;inset:0;z-index:-1;overflow:hidden}
+.hero-media img{
+  width:100%;height:100%;object-fit:cover;opacity:.34;
+  filter:saturate(125%) hue-rotate(-14deg) contrast(108%);
+  animation:kenburns 34s ease-in-out infinite alternate;
+}
+@keyframes kenburns{
+  0%{transform:scale(1.06) translate3d(-1.5%,1%,0)}
+  100%{transform:scale(1.22) translate3d(2%,-2%,0)}
+}
+.hero-media::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(1,14,22,.86) 0%,rgba(2,22,32,.55) 38%,rgba(1,10,16,.94) 100%),
+             radial-gradient(70% 60% at 20% 70%, rgba(2,18,26,.8), rgba(2,18,26,0) 70%);
+}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,.85fr);gap:3.5rem;align-items:end;padding-bottom:2.2rem}
+.title-stack{position:relative}
+.title-mini{font-family:var(--display);font-weight:300;font-size:clamp(1rem,2.1vw,1.7rem);letter-spacing:.55em;color:var(--glow);margin-bottom:.5rem;text-transform:uppercase}
+.title-main{
+  font-size:clamp(2.3rem,8.2vw,7.6rem);font-weight:900;letter-spacing:-.045em;line-height:.82;
+  color:#f2fdff;text-shadow:0 0 70px rgba(69,217,255,.35),0 12px 60px rgba(0,0,0,.6);
+}
+.title-main .ltr{display:inline-block;opacity:0;transform:translateY(.55em) rotateX(-55deg);filter:blur(9px);
+  animation:ltrIn 1.05s var(--ease) forwards;animation-delay:calc(var(--i)*62ms + 260ms)}
+@keyframes ltrIn{to{opacity:1;transform:none;filter:blur(0)}}
+.title-main .word2{color:transparent;-webkit-text-stroke:1.5px rgba(99,245,216,.85);text-shadow:none}
+.hero-sub{margin-top:1.6rem;display:flex;gap:1.6rem;align-items:flex-start;max-width:56ch}
+.hero-sub p{font-size:clamp(.98rem,1.3vw,1.12rem);color:#c3dde4}
+.hero-cta{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem}
+.btn{
+  --bg:var(--glow);
+  position:relative;display:inline-flex;align-items:center;gap:.7rem;padding:.95rem 1.6rem;
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+  border:1px solid var(--bg);color:#02151d;background:var(--bg);overflow:hidden;
+  transition:all .4s var(--ease);clip-path:polygon(0 0,100% 0,100% 68%,calc(100% - 14px) 100%,0 100%);
+}
+.btn span{position:relative;z-index:2}
+.btn::before{content:"";position:absolute;inset:0;background:#fff;transform:translateY(101%);transition:transform .45s var(--ease);z-index:1}
+.btn:hover::before{transform:none}
+.btn:hover{box-shadow:0 0 40px -8px var(--bg)}
+.btn.ghost{background:transparent;color:var(--ink);--bg:rgba(132,169,181,.45);border-color:rgba(132,169,181,.45)}
+.btn.ghost::before{background:var(--glow)}
+.btn.ghost:hover{color:#02151d;border-color:var(--glow)}
+
+/* HUD log */
+.hud{
+  border:1px solid rgba(99,245,216,.22);background:rgba(3,26,36,.62);backdrop-filter:blur(9px);
+  padding:1.35rem 1.4rem 1.15rem;position:relative;
+  clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,22px 100%,0 calc(100% - 22px));
+}
+.hud::before{content:"";position:absolute;top:0;left:0;width:100%;height:2px;
+  background:linear-gradient(90deg,transparent,var(--glow),transparent);animation:scan 3.6s linear infinite}
+@keyframes scan{0%{transform:translateY(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(320px);opacity:0}}
+.hud h4{font-family:var(--mono);font-weight:700;font-size:.66rem;letter-spacing:.28em;color:var(--glow);text-transform:uppercase;margin-bottom:1rem}
+.hud dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.55rem .9rem;font-size:.82rem}
+.hud dt{font-family:var(--mono);font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap;padding-top:.15rem}
+.hud dd{margin:0;text-align:right;color:#e6f6f9;font-weight:600}
+.hud dd b{color:var(--amber);font-weight:800}
+.hud-foot{margin-top:1.05rem;padding-top:.85rem;border-top:1px dashed rgba(132,169,181,.28);
+  display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.pulse-dot{width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 0 0 rgba(99,245,216,.7);animation:pulse 2.4s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 12px rgba(99,245,216,0)}100%{box-shadow:0 0 0 0 rgba(99,245,216,0)}}
+
+/* ticker */
+.ticker{
+  border-top:1px solid rgba(99,245,216,.16);border-bottom:1px solid rgba(99,245,216,.16);
+  background:rgba(2,20,28,.6);overflow:hidden;padding:.7rem 0;position:relative;z-index:3
+}
+.ticker-track{display:flex;gap:3rem;width:max-content;animation:tick 42s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+@keyframes tick{to{transform:translateX(-50%)}}
+.ticker i{font-family:var(--mono);font-style:normal;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:#9dc3cd;display:flex;align-items:center;gap:3rem;white-space:nowrap}
+.ticker i::after{content:"◆";color:var(--bio);font-size:.6rem}
+
+/* creature silhouettes */
+.hero-grid{position:relative;z-index:3}
+.drift{position:absolute;z-index:1;pointer-events:none;opacity:.5}
+.drift svg{width:100%;height:auto;fill:#021a25;filter:drop-shadow(0 0 26px rgba(99,245,216,.28))}
+.drift.tulkun{width:min(560px,52vw);bottom:12%;left:-25%;animation:swim 74s linear infinite}
+.drift.ilu1{width:min(230px,26vw);bottom:31%;left:-15%;animation:swim 48s linear infinite 6s;opacity:.4}
+.drift.ilu2{width:min(170px,20vw);bottom:22%;left:-15%;animation:swim 62s linear infinite 20s;opacity:.3}
+@keyframes swim{
+  0%{transform:translate3d(0,0,0) scale(.9)}
+  50%{transform:translate3d(80vw,-38px,0) scale(1)}
+  100%{transform:translate3d(165vw,10px,0) scale(.95)}
+}
+.dot-glow{animation:dotpulse 3.2s ease-in-out infinite}
+.dot-glow:nth-child(2n){animation-delay:.7s}
+.dot-glow:nth-child(3n){animation-delay:1.4s}
+@keyframes dotpulse{0%,100%{opacity:.25}50%{opacity:1}}
+
+.scroll-cue{position:absolute;bottom:1.2rem;left:50%;transform:translateX(-50%);z-index:4;display:grid;justify-items:center;gap:.5rem}
+.scroll-cue span{font-family:var(--mono);font-size:.56rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.scroll-line{width:1px;height:52px;background:linear-gradient(180deg,transparent,var(--glow));position:relative;overflow:hidden}
+.scroll-line::after{content:"";position:absolute;inset:0;background:var(--glow);animation:drip 2.1s var(--ease) infinite}
+@keyframes drip{0%{transform:translateY(-100%)}60%,100%{transform:translateY(100%)}}
+
+/* ============================================================
+   SHARED SECTION HEADINGS
+   ============================================================ */
+.sec{padding:clamp(4.5rem,10vw,9rem) 0}
+.sec-head{display:flex;flex-wrap:wrap;gap:1.6rem;justify-content:space-between;align-items:flex-end;margin-bottom:3.2rem}
+.sec-head .num{font-family:var(--mono);font-size:.66rem;letter-spacing:.28em;color:var(--bio)}
+
+/* ============================================================
+   STORY
+   ============================================================ */
+.story-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(2rem,5vw,5rem);align-items:start}
+.story-body p{font-size:1.02rem;color:#c0dbe2;margin:0 0 1.15rem}
+.story-body p:first-of-type::first-letter{
+  float:left;font-family:var(--display);font-weight:900;font-size:4.4rem;line-height:.78;
+  padding:.1em .16em 0 0;color:var(--glow);text-shadow:0 0 30px rgba(99,245,216,.4);
+}
+.pullquote{
+  margin:2rem 0;padding:1.5rem 1.6rem;border-left:2px solid var(--bio);
+  background:linear-gradient(90deg,rgba(255,95,162,.10),rgba(255,95,162,0));
+  font-family:var(--display);font-weight:300;font-size:clamp(1.1rem,2vw,1.5rem);line-height:1.32;color:#fff
+}
+.pullquote cite{display:block;margin-top:.8rem;font-family:var(--mono);font-style:normal;font-size:.63rem;letter-spacing:.24em;text-transform:uppercase;color:var(--bio)}
+.chapters{display:grid;gap:1rem}
+.chapter{
+  position:relative;display:grid;grid-template-columns:78px 1fr;gap:1.1rem;align-items:center;
+  padding:.85rem;border:1px solid rgba(132,169,181,.18);background:rgba(4,30,42,.5);
+  transition:all .5s var(--ease);overflow:hidden
+}
+.chapter::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(99,245,216,.12),transparent 70%);opacity:0;transition:opacity .5s}
+.chapter:hover{border-color:rgba(99,245,216,.45);transform:translateX(8px)}
+.chapter:hover::after{opacity:1}
+.chapter .thumb{width:78px;height:78px;overflow:hidden;position:relative;flex:0 0 auto}
+.chapter .thumb img{width:100%;height:100%;object-fit:cover;filter:saturate(70%) brightness(.75);transition:all .7s var(--ease)}
+.chapter:hover .thumb img{filter:saturate(130%) brightness(1);transform:scale(1.12)}
+.chapter .no{position:absolute;top:2px;left:4px;font-family:var(--mono);font-size:.6rem;color:var(--glow);z-index:2}
+.chapter h4{font-size:1.02rem;font-weight:600;letter-spacing:-.01em;margin-bottom:.3rem}
+.chapter p{margin:0;font-size:.84rem;color:var(--muted);line-height:1.5}
+.chapter time{font-family:var(--mono);font-size:.58rem;letter-spacing:.2em;color:var(--amber);text-transform:uppercase}
+
+/* full-width band */
+.strip{position:relative;height:min(78vh,660px);overflow:hidden;display:grid;place-items:center;z-index:2}
+.strip img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(120%) brightness(.62);animation:kenburns 30s ease-in-out infinite alternate}
+.strip::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--abyss),rgba(1,12,18,.25) 40%,var(--abyss))}
+.strip-q{position:relative;z-index:2;text-align:center;padding:0 6vw;max-width:24ch}
+.strip-q blockquote{font-family:var(--display);font-weight:300;font-size:clamp(1.5rem,4.4vw,3.4rem);line-height:1.1;margin:0;color:#fff;text-shadow:0 8px 50px rgba(0,0,0,.7)}
+.strip-q b{font-weight:800;color:var(--glow)}
+.strip-q span{display:block;margin-top:1.4rem;font-family:var(--mono);font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;color:#bfe6ee}
+
+/* ============================================================
+   CLANS
+   ============================================================ */
+.clan-tabs{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2rem}
+.clan-tab{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+  padding:.8rem 1.4rem;border:1px solid rgba(132,169,181,.3);color:#a9c9d2;transition:all .4s var(--ease);position:relative
+}
+.clan-tab:hover{border-color:var(--glow);color:#fff}
+.clan-tab.active{background:var(--glow);border-color:var(--glow);color:#02151d;font-weight:700}
+.clan-stage{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:0;border:1px solid rgba(132,169,181,.2);background:rgba(3,26,36,.55);overflow:hidden}
+.clan-visual{position:relative;min-height:420px;overflow:hidden}
+.clan-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .8s var(--ease),transform 8s linear}
+.clan-visual .veil{position:absolute;inset:0;transition:background .8s var(--ease)}
+.clan-visual .tagm{position:absolute;left:1.4rem;bottom:1.4rem;z-index:3}
+.clan-visual .tagm svg{width:96px;height:96px;opacity:.85;filter:drop-shadow(0 0 18px rgba(99,245,216,.5))}
+.clan-body{padding:clamp(1.6rem,3vw,2.8rem)}
+.clan-panel{display:none}
+.clan-panel.active{display:block;animation:fadeUp .7s var(--ease)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.clan-body h3{font-size:clamp(1.7rem,3.4vw,2.7rem);margin-bottom:.35rem}
+.navi-name{font-family:var(--mono);font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;color:var(--bio);margin-bottom:1.3rem;display:block}
+.clan-body>p{color:#bcd8df;font-size:.98rem;margin-bottom:1.6rem}
+.spec{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:rgba(132,169,181,.2);border:1px solid rgba(132,169,181,.2);margin-bottom:1.6rem}
+.spec div{background:#04222e;padding:.85rem 1rem}
+.spec dt{font-family:var(--mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.28rem}
+.spec dd{margin:0;font-weight:700;font-size:.92rem;color:#eaf7fa}
+.stat{display:grid;grid-template-columns:150px 1fr 34px;gap:.9rem;align-items:center;margin-bottom:.7rem}
+.stat-k{font-family:var(--mono);font-size:.63rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.bar{height:5px;background:rgba(132,169,181,.18);position:relative;overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;width:0;background:linear-gradient(90deg,var(--glow2),var(--glow));transition:width 1.2s var(--ease);box-shadow:0 0 14px rgba(99,245,216,.6)}
+.stat b{font-family:var(--mono);font-size:.72rem;color:var(--glow);text-align:right}
+
+/* ============================================================
+   HEROES (bento)
+   ============================================================ */
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:1rem;grid-auto-rows:minmax(190px,auto)}
+.card{
+  position:relative;overflow:hidden;border:1px solid rgba(132,169,181,.18);
+  background:linear-gradient(160deg,rgba(6,36,48,.9),rgba(2,17,25,.95));
+  padding:1.3rem;display:flex;flex-direction:column;justify-content:flex-end;
+  transition:transform .55s var(--ease),border-color .45s,box-shadow .55s;isolation:isolate
+}
+.card:hover{transform:translateY(-7px);border-color:rgba(99,245,216,.5);box-shadow:0 26px 60px -30px rgba(0,0,0,.9),0 0 44px -22px var(--glow)}
+.card .dots{position:absolute;inset:0;z-index:-1;opacity:.5;transition:opacity .6s,transform 1.2s var(--ease)}
+.card:hover .dots{opacity:1;transform:scale(1.06)}
+.card .glowblob{position:absolute;width:170px;height:170px;border-radius:50%;filter:blur(46px);z-index:-2;opacity:.5;transition:opacity .6s,top .7s var(--ease),left .7s var(--ease)}
+.card:hover .glowblob{opacity:.9}
+.card .role{font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--glow);margin-bottom:.45rem}
+.card h3{font-size:clamp(1.15rem,2vw,1.75rem);font-weight:800;color:#f4fdfe}
+.card .actor{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;color:var(--muted);margin-top:.4rem;text-transform:uppercase}
+.card p{font-size:.84rem;color:#b4d2da;margin:.7rem 0 0;max-height:0;opacity:0;overflow:hidden;transition:max-height .6s var(--ease),opacity .5s,margin .5s}
+.card:hover p,.card.open p{max-height:180px;opacity:1}
+.card .idx{position:absolute;top:1rem;right:1.15rem;font-family:var(--mono);font-size:.6rem;color:rgba(255,255,255,.34);letter-spacing:.1em}
+.card .glyph{position:absolute;top:.7rem;left:1rem;width:36px;height:36px;opacity:.55;transition:all .6s var(--ease)}
+.card:hover .glyph{opacity:1;transform:rotate(12deg) scale(1.1)}
+.span6{grid-column:span 6}.span4{grid-column:span 4}.span3{grid-column:span 3}.span5{grid-column:span 5}.span8{grid-column:span 8}.span7{grid-column:span 7}
+.tall{grid-row:span 2}
+
+/* ============================================================
+   CREATURES
+   ============================================================ */
+.beast{display:grid;grid-template-columns:300px minmax(0,1fr);gap:2.2rem;align-items:start}
+.beast-list{display:flex;flex-direction:column;border-top:1px solid rgba(132,169,181,.2)}
+.beast-list button{
+  display:flex;align-items:center;gap:.8rem;text-align:left;padding:.95rem .4rem;
+  border-bottom:1px solid rgba(132,169,181,.2);transition:all .4s var(--ease);position:relative
+}
+.beast-list button::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--glow);transform:scaleY(0);transform-origin:bottom;transition:transform .45s var(--ease)}
+.beast-list button:hover{padding-left:1rem;color:#fff}
+.beast-list button.active{color:var(--glow);padding-left:1rem}
+.beast-list button.active::before{transform:scaleY(1)}
+.beast-list .bn{font-family:var(--mono);font-size:.6rem;color:var(--muted)}
+.beast-list .bname{font-family:var(--display);font-weight:600;font-size:.98rem;letter-spacing:-.01em}
+.beast-list .blat{font-family:var(--mono);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:block;margin-top:.15rem}
+.beast-view{
+  border:1px solid rgba(132,169,181,.2);background:
+   radial-gradient(80% 60% at 70% 20%, rgba(11,96,112,.35), transparent 70%),
+   linear-gradient(160deg,rgba(4,30,42,.85),rgba(2,15,22,.9));
+  padding:clamp(1.4rem,3vw,2.6rem);position:relative;overflow:hidden;min-height:430px
+}
+.beast-view .art{display:grid;place-items:center;padding:1rem 0 1.6rem}
+.beast-view .art svg{width:min(100%,420px);height:auto;fill:var(--glow);filter:drop-shadow(0 0 26px rgba(99,245,216,.4));animation:floaty 7s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-14px) rotate(1.5deg)}}
+.beast-view h3{font-size:clamp(1.7rem,3.6vw,2.8rem)}
+.beast-view .lat{font-family:var(--mono);font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--bio);margin:.4rem 0 1.1rem;display:block}
+.beast-view p{color:#bcd8df;max-width:62ch}
+.beast-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.1rem;margin-top:1.8rem;padding-top:1.5rem;border-top:1px dashed rgba(132,169,181,.25)}
+.beast-stats .stat{grid-template-columns:1fr;gap:.4rem;margin:0}
+.fade-swap{animation:fadeUp .55s var(--ease)}
+
+/* ============================================================
+   GALLERY
+   ============================================================ */
+.gal{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:118px;gap:.85rem}
+.gi{position:relative;overflow:hidden;cursor:pointer;background:#04222e;border:1px solid rgba(132,169,181,.14)}
+.gi img{width:100%;height:100%;object-fit:cover;filter:saturate(118%) contrast(105%) brightness(.86);transition:transform 1.1s var(--ease),filter .6s}
+.gi:hover img{transform:scale(1.09);filter:saturate(150%) brightness(1.02)}
+.gi figcaption{
+  position:absolute;inset:auto 0 0 0;padding:1.6rem .95rem .85rem;
+  background:linear-gradient(0deg,rgba(1,12,18,.92),transparent);
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:#d7eef3;
+  transform:translateY(102%);transition:transform .5s var(--ease)
+}
+.gi:hover figcaption{transform:none}
+.gi::after{content:"⤢";position:absolute;top:.6rem;right:.7rem;font-size:.9rem;color:var(--glow);opacity:0;transform:scale(.6);transition:all .45s var(--ease)}
+.gi:hover::after{opacity:1;transform:none}
+.g1{grid-column:span 7;grid-row:span 4}
+.g2{grid-column:span 5;grid-row:span 2}
+.g3{grid-column:span 5;grid-row:span 2}
+.g4{grid-column:span 4;grid-row:span 3}
+.g5{grid-column:span 4;grid-row:span 3}
+.g6{grid-column:span 4;grid-row:span 3}
+.g7{grid-column:span 6;grid-row:span 2}
+.g8{grid-column:span 6;grid-row:span 2}
+.lightbox{position:fixed;inset:0;z-index:80;background:rgba(1,9,14,.96);backdrop-filter:blur(12px);display:none;place-items:center;padding:4vh 4vw}
+.lightbox.open{display:grid;animation:fadeUp .4s var(--ease)}
+.lightbox img{max-width:100%;max-height:78vh;object-fit:contain;border:1px solid rgba(99,245,216,.25);box-shadow:0 40px 120px -40px #000}
+.lb-cap{font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:1.1rem;text-align:center}
+.lb-btn{position:absolute;width:52px;height:52px;border:1px solid rgba(132,169,181,.35);border-radius:50%;display:grid;place-items:center;transition:all .35s;font-size:1.1rem}
+.lb-btn:hover{border-color:var(--glow);color:var(--glow);background:rgba(99,245,216,.1)}
+.lb-prev{left:2vw;top:50%;transform:translateY(-50%)}
+.lb-next{right:2vw;top:50%;transform:translateY(-50%)}
+.lb-close{top:3vh;right:3vw}
+.lb-count{position:absolute;top:3.4vh;left:3vw;font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;color:var(--glow)}
+
+/* ============================================================
+   DOSSIER (light section)
+   ============================================================ */
+.dossier{
+  background:var(--paper);color:var(--paper-ink);position:relative;z-index:2;
+  background-image:
+    linear-gradient(rgba(5,37,48,.055) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(5,37,48,.055) 1px,transparent 1px);
+  background-size:34px 34px;
+  border-block:1px solid rgba(99,245,216,.3);
+}
+.dossier::before,.dossier::after{content:"";position:absolute;left:0;right:0;height:70px;pointer-events:none}
+.dossier::before{top:0;background:linear-gradient(180deg,rgba(1,14,22,.5),transparent)}
+.dossier::after{bottom:0;background:linear-gradient(0deg,rgba(1,14,22,.5),transparent)}
+.dossier .eyebrow{color:#0b6070}
+.dossier .eyebrow::before{background:linear-gradient(90deg,#0b6070,transparent)}
+.dossier .sec-title{color:var(--paper-ink)}
+.dossier .sec-title em{color:#5a7a80}
+.dossier .lead{color:#2f5159}
+.dossier .sec-head .num{color:#c2451f}
+.tech{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:1px;background:rgba(5,37,48,.18);border:1px solid rgba(5,37,48,.18)}
+.tech article{background:var(--paper);padding:1.6rem 1.5rem 1.8rem;position:relative;transition:background .45s var(--ease)}
+.tech article:hover{background:#eef3f2}
+.tech article::before{content:"";position:absolute;left:0;top:0;height:3px;width:0;background:#0b6070;transition:width .6s var(--ease)}
+.tech article:hover::before{width:100%}
+.tech .tno{font-family:var(--display);font-weight:900;font-size:2.6rem;line-height:1;color:rgba(5,37,48,.14);transition:color .5s}
+.tech article:hover .tno{color:rgba(11,96,112,.42)}
+.tech h4{font-size:1.06rem;margin:.7rem 0 .55rem;color:var(--paper-ink)}
+.tech p{font-size:.86rem;color:#3f6169;margin:0}
+.tech .badge{display:inline-block;margin-top:.9rem;font-family:var(--mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;
+  border:1px solid rgba(5,37,48,.3);padding:.28rem .6rem;color:#0b6070}
+.blueprint{margin-top:2.4rem;border:1px solid rgba(5,37,48,.22);padding:1.6rem;background:rgba(255,255,255,.34)}
+.blueprint h4{font-family:var(--mono);font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:#0b6070;margin-bottom:1.2rem}
+.bp-row{display:grid;grid-template-columns:190px 1fr 74px;gap:1rem;align-items:center;padding:.5rem 0;border-bottom:1px dashed rgba(5,37,48,.2)}
+.bp-row:last-child{border-bottom:0}
+.bp-row .k{font-size:.85rem;font-weight:600;color:#123c47}
+.bp-bar{height:9px;background:rgba(5,37,48,.12);position:relative;overflow:hidden}
+.bp-bar i{position:absolute;inset:0 auto 0 0;width:0;background:repeating-linear-gradient(115deg,#0b6070 0 8px,#0d7489 8px 16px);transition:width 1.3s var(--ease)}
+.bp-row .v{font-family:var(--mono);font-size:.76rem;text-align:right;color:#0b6070;font-weight:700}
+
+/* ============================================================
+   NUMBERS
+   ============================================================ */
+.nums{display:grid;grid-template-columns:repeat(12,1fr);gap:1rem}
+.num-card{
+  border:1px solid rgba(132,169,181,.2);padding:1.5rem;background:linear-gradient(165deg,rgba(6,36,48,.72),rgba(2,17,25,.85));
+  position:relative;overflow:hidden;transition:all .5s var(--ease)
+}
+.num-card:hover{border-color:rgba(99,245,216,.45);transform:translateY(-5px)}
+.num-card .big{font-family:var(--display);font-weight:900;font-size:clamp(2rem,4.4vw,3.5rem);line-height:.9;color:#f0fdff;letter-spacing:-.03em}
+.num-card .big small{font-size:.4em;font-weight:600;color:var(--glow);margin-left:.15em}
+.num-card .lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:.7rem}
+.num-card .sub{font-size:.82rem;color:#a8c8d1;margin-top:.4rem}
+.num-card.hl{background:linear-gradient(165deg,rgba(255,95,162,.16),rgba(2,17,25,.9));border-color:rgba(255,95,162,.35)}
+.num-card.hl .big{color:#fff}
+.num-card.hl .lbl{color:var(--bio)}
+.chart{margin-top:2.6rem;border:1px solid rgba(132,169,181,.2);padding:clamp(1.3rem,2.6vw,2.2rem);background:rgba(3,24,33,.6)}
+.chart h4{font-family:var(--mono);font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;color:var(--glow);margin-bottom:1.6rem}
+.crow{display:grid;grid-template-columns:150px 1fr 92px;gap:1rem;align-items:center;padding:.55rem 0}
+.crow .cn{font-size:.86rem;color:#cfe6eb}
+.crow .cb{height:20px;background:rgba(132,169,181,.1);position:relative;overflow:hidden}
+.crow .cb i{position:absolute;inset:0 auto 0 0;width:0;background:linear-gradient(90deg,#0b6070,var(--glow2),var(--glow));transition:width 1.5s var(--ease);box-shadow:0 0 20px -4px var(--glow2)}
+.crow:nth-child(2) .cb i{background:linear-gradient(90deg,#7a2b4d,var(--bio))}
+.crow .cv{font-family:var(--mono);font-size:.76rem;text-align:right;color:var(--amber);font-weight:700}
+.awards{margin-top:2.2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.8rem}
+.award{border-left:2px solid var(--amber);padding:.5rem 0 .5rem .95rem;font-size:.84rem;color:#c8e2e8}
+.award b{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:.28rem}
+.award.win{border-color:var(--glow)}.award.win b{color:var(--glow)}
+
+/* ============================================================
+   QUOTES
+   ============================================================ */
+.quotes{border-block:1px solid rgba(99,245,216,.18);background:linear-gradient(180deg,rgba(3,26,36,.6),rgba(1,12,18,.2))}
+.q-stage{position:relative;min-height:clamp(280px,34vw,360px);display:grid;align-items:center}
+.q-slide{position:absolute;inset:0;display:grid;align-items:center;opacity:0;transform:translateY(20px) scale(.99);transition:all .8s var(--ease);pointer-events:none}
+.q-slide.active{opacity:1;transform:none;pointer-events:auto}
+.q-slide blockquote{margin:0;font-family:var(--display);font-weight:300;font-size:clamp(1.4rem,4.2vw,3.1rem);line-height:1.14;color:#f2fdff;max-width:22ch}
+.q-slide blockquote b{font-weight:800;color:var(--glow)}
+.q-slide .who{margin-top:1.6rem;font-family:var(--mono);font-size:.64rem;letter-spacing:.28em;text-transform:uppercase;color:var(--bio)}
+.q-slide .navi{margin-top:.4rem;font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;color:var(--muted)}
+.q-nav{display:flex;gap:.6rem;align-items:center;margin-top:1.6rem}
+.q-dot{width:34px;height:3px;background:rgba(132,169,181,.3);transition:all .4s var(--ease)}
+.q-dot.active{background:var(--glow);box-shadow:0 0 14px var(--glow);width:56px}
+.q-arrow{width:44px;height:44px;border:1px solid rgba(132,169,181,.3);display:grid;place-items:center;transition:all .35s;margin-left:.4rem}
+.q-arrow:hover{border-color:var(--glow);color:var(--glow)}
+
+/* ============================================================
+   CONNECTION WITH EYWA
+   ============================================================ */
+/* SAGA · TIMELINE */
+.saga{position:relative;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(238px,1fr);gap:1rem;overflow-x:auto;padding:2.6rem 0 1.2rem;scroll-snap-type:x mandatory;scrollbar-width:thin}
+.saga::before{content:"";position:absolute;left:0;top:calc(2.6rem + 2px);width:1340px;height:1px;background:linear-gradient(90deg,transparent,rgba(99,245,216,.4),rgba(255,95,162,.35),transparent)}
+.saga-item{position:relative;padding:2.4rem 1.1rem 1.3rem;border:1px solid rgba(132,169,181,.18);background:linear-gradient(170deg,rgba(6,36,48,.66),rgba(2,16,23,.9));scroll-snap-align:start;transition:all .5s var(--ease)}
+.saga-item::before{content:"";position:absolute;top:-4.5px;left:1.1rem;width:9px;height:9px;border-radius:50%;background:var(--abyss);border:2px solid var(--glow);transition:all .45s var(--ease)}
+.saga-item:hover{transform:translateY(-8px);border-color:rgba(99,245,216,.45);box-shadow:0 30px 60px -34px #000}
+.saga-item:hover::before{background:var(--glow);box-shadow:0 0 18px var(--glow);transform:scale(1.35)}
+.saga-item.done::before{background:var(--glow)}
+.saga-item.next::before{border-color:var(--bio)}
+.saga-item .yr{font-family:var(--display);font-weight:900;font-size:2.1rem;line-height:1;color:#eafcff;letter-spacing:-.03em}
+.saga-item.next .yr{color:var(--bio)}
+.saga-item h4{font-size:1rem;margin:.65rem 0 .45rem;font-weight:600}
+.saga-item p{margin:0;font-size:.82rem;color:#a8c8d1}
+.saga-item .st{position:absolute;top:.8rem;right:1rem;font-family:var(--mono);font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.saga-hint{font-family:var(--mono);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin:0}
+
+.bond{position:relative;overflow:hidden;border-top:1px solid rgba(99,245,216,.18)}
+#bondCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;cursor:crosshair}
+.bond-in{position:relative;z-index:2;text-align:center;padding:clamp(3rem,8vw,7rem) 0;pointer-events:none}
+.bond-in .eyebrow{justify-content:center}
+.bond-in .eyebrow::before{display:none}
+.bond-in h2{font-size:clamp(1.9rem,5.2vw,4rem);margin:.9rem 0 1rem}
+.bond-in p{color:#b7d5dd;max-width:52ch;margin:0 auto}
+.bond-meter{margin-top:2.2rem;display:inline-flex;flex-direction:column;align-items:center;gap:.7rem}
+.bond-meter .bm-bar{width:min(360px,72vw);height:3px;background:rgba(132,169,181,.22);position:relative;overflow:hidden}
+.bond-meter .bm-bar i{position:absolute;inset:0 auto 0 0;width:0;background:linear-gradient(90deg,var(--glow2),var(--bio));transition:width .3s linear;box-shadow:0 0 18px var(--glow)}
+.bond-meter .bm-txt{font-family:var(--mono);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--glow)}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{position:relative;z-index:2;border-top:1px solid rgba(99,245,216,.16);background:rgba(1,10,16,.72);padding:3.4rem 0 2rem}
+.foot-grid{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(2,minmax(0,.7fr));gap:2.4rem}
+.foot-grid h5{font-family:var(--mono);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--glow);margin:0 0 1rem}
+.foot-grid ul{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.foot-grid a{font-size:.86rem;color:#a9c9d2;transition:all .3s;display:inline-block}
+.foot-grid a:hover{color:var(--glow);transform:translateX(4px)}
+.foot-bot{margin-top:2.6rem;padding-top:1.4rem;border-top:1px solid rgba(132,169,181,.16);display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center}
+.foot-bot p{margin:0;font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;color:#6d939e;text-transform:uppercase}
+.top-btn{font-family:var(--mono);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--glow);display:inline-flex;align-items:center;gap:.5rem;transition:gap .3s}
+.top-btn:hover{gap:.9rem}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1100px){
+  .nav-links{display:none}
+  .burger{display:grid}
+  .hero-grid{grid-template-columns:1fr;gap:2.2rem}
+  .story-grid{grid-template-columns:1fr}
+  .clan-stage{grid-template-columns:1fr}
+  .clan-visual{min-height:280px}
+  .beast{grid-template-columns:1fr}
+  .beast-list{flex-direction:row;overflow-x:auto;gap:.4rem;border-top:0;padding-bottom:.5rem}
+  .beast-list button{border:1px solid rgba(132,169,181,.2);padding:.6rem .9rem;white-space:nowrap}
+  .beast-list button.active::before{width:100%;height:2px;top:auto;bottom:-1px;left:0;right:0}
+  .span6,.span4,.span3,.span5,.span8,.span7{grid-column:span 6}
+  .tall{grid-row:span 1}
+}
+@media (max-width:1499px){
+  .depth-info{display:none}
+  .depth-scale{height:min(38vh,300px)}
+}
+@media (max-width:760px){
+  .depth{left:10px;transform:translateY(-50%) scale(.82);opacity:.85}
+  .depth-zone{display:none}
+  .span6,.span4,.span3,.span5,.span8,.span7{grid-column:span 12}
+  .gal{grid-template-columns:repeat(6,1fr);grid-auto-rows:96px}
+  .g1,.g2,.g3,.g4,.g5,.g6,.g7,.g8{grid-column:span 6;grid-row:span 3}
+  .g2,.g3{grid-row:span 2}
+  .hud dl{grid-template-columns:1fr;gap:.15rem}
+  .hud dd{text-align:left;margin-bottom:.55rem}
+  .stat{grid-template-columns:110px 1fr 30px;gap:.6rem}
+  .crow{grid-template-columns:96px 1fr 66px;gap:.6rem}
+  .bp-row{grid-template-columns:1fr;gap:.35rem}
+  .bp-row .v{text-align:left}
+  .foot-grid{grid-template-columns:1fr}
+  .scroll-cue{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  html{scroll-behavior:auto}
+  .rv,.rv-x,.rv-s{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- BACKGROUND -->
+<div class="bg-grad"></div>
+<div class="caustics"></div>
+<canvas id="sea"></canvas>
+<div class="vignette"></div>
+<div class="grain"></div>
+
+<!-- NAVIGATION -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a href="#dive" class="brand" aria-label="Avatar: The Way of Water — back to top">
+      <svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <circle cx="20" cy="20" r="18.4" stroke="#63f5d8" stroke-width="1.1" opacity=".55"/>
+        <path d="M4 22c4-5 7-5 11 0s7 5 11 0 7-5 10 0" stroke="#63f5d8" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M6 29c3.6-4.4 6.4-4.4 10 0s6.4 4.4 10 0 6.4-4.4 8 0" stroke="#ff5fa2" stroke-width="1.2" stroke-linecap="round" opacity=".8"/>
+        <circle cx="20" cy="11.5" r="3" fill="#45d9ff"/>
+      </svg>
+      <span class="brand-txt">AVATAR<small>THE WAY OF WATER</small></span>
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+      <a href="#dive">Descent</a>
+      <a href="#story">Story</a>
+      <a href="#clans">Clans</a>
+      <a href="#heroes">Heroes</a>
+      <a href="#creatures">Creatures</a>
+      <a href="#gallery">Stills</a>
+      <a href="#craft">Making of</a>
+      <a href="#numbers">Numbers</a>
+      <a href="#saga">Saga</a>
+    </nav>
+    <div class="nav-tools">
+      <button class="icon-btn" id="soundBtn" title="Ocean sound" aria-label="Turn on ocean sound">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+          <path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="wv" d="M16.5 8.5a5 5 0 010 7M19.5 6a8.5 8.5 0 010 12" opacity=".45"/>
+          <path class="mut" d="M17 9.5l5 5M22 9.5l-5 5" opacity="0"/>
+        </svg>
+      </button>
+      <a href="#bond" class="btn" style="--bg:var(--bio);padding:.7rem 1.15rem"><span>Connect with Eywa</span></a>
+      <button class="icon-btn burger" id="burger" aria-label="Menu" aria-expanded="false">
+        <svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#dive"><span>01</span>Descent</a>
+  <a href="#story"><span>02</span>Story</a>
+  <a href="#clans"><span>03</span>Clans</a>
+  <a href="#heroes"><span>04</span>Heroes</a>
+  <a href="#creatures"><span>05</span>Creatures</a>
+  <a href="#gallery"><span>06</span>Stills</a>
+  <a href="#craft"><span>07</span>Making of</a>
+  <a href="#numbers"><span>08</span>Numbers</a>
+  <a href="#saga"><span>09</span>Saga</a>
+  <a href="#bond"><span>10</span>Connect with Eywa</a>
+</div>
+
+<!-- DEPTH GAUGE -->
+<div class="depth" id="depthRail" aria-hidden="true">
+  <div class="depth-scale">
+    <div class="depth-ticks" id="depthTicks"></div>
+    <div class="depth-marker" id="depthMarker"></div>
+  </div>
+  <div class="depth-info">
+    <div class="depth-num"><span id="depthVal">0</span><sup>m</sup></div>
+    <div class="depth-zone" id="depthZone">EPIPELAGIC</div>
+  </div>
+</div>
+
+<main>
+
+<!-- ============ 01 · DESCENT ============ -->
+<section class="hero" id="dive">
+  <div class="hero-media">
+    <img src="https://images.pexels.com/photos/39259370/pexels-photo-39259370.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1600" alt="Glowing anemones deep in the ocean" fetchpriority="high">
+  </div>
+
+  <!-- silhouettes -->
+  <div class="drift tulkun" aria-hidden="true">
+    <svg viewBox="0 0 660 240">
+      <path d="M26,138 C58,100 132,74 244,76 C338,78 424,92 500,108 C524,113 540,114 552,112 L616,68 C630,58 640,68 632,80 L600,120 L634,156 C644,168 632,180 618,172 L552,138 C524,152 472,172 380,184 C276,198 156,190 88,170 C48,158 24,150 26,138 Z"/>
+      <path d="M246,156 C258,196 240,224 208,236 C222,204 226,178 224,158 Z"/>
+      <path d="M300,86 C312,62 330,52 348,50 C336,66 332,80 334,92 Z"/>
+      <g fill="#63f5d8">
+        <circle class="dot-glow" cx="72" cy="128" r="3.4"/>
+        <circle class="dot-glow" cx="128" cy="118" r="2.6"/>
+        <circle class="dot-glow" cx="186" cy="112" r="3.1"/>
+        <circle class="dot-glow" cx="248" cy="110" r="2.3"/>
+        <circle class="dot-glow" cx="312" cy="112" r="3"/>
+        <circle class="dot-glow" cx="378" cy="118" r="2.4"/>
+        <circle class="dot-glow" cx="440" cy="124" r="2.9"/>
+        <circle class="dot-glow" cx="498" cy="130" r="2.2"/>
+      </g>
+    </svg>
+  </div>
+  <div class="drift ilu1" aria-hidden="true">
+    <svg viewBox="0 0 400 120">
+      <path d="M20,60 C60,34 130,26 200,38 C260,48 320,44 372,28 C384,24 388,34 378,40 C350,56 320,64 296,64 C330,72 356,84 368,98 C374,106 364,112 356,104 C336,86 300,74 260,76 C200,80 120,96 66,84 C34,77 16,70 20,60 Z"/>
+    </svg>
+  </div>
+  <div class="drift ilu2" aria-hidden="true">
+    <svg viewBox="0 0 400 120">
+      <path d="M20,60 C60,34 130,26 200,38 C260,48 320,44 372,28 C384,24 388,34 378,40 C350,56 320,64 296,64 C330,72 356,84 368,98 C374,106 364,112 356,104 C336,86 300,74 260,76 C200,80 120,96 66,84 C34,77 16,70 20,60 Z"/>
+    </svg>
+  </div>
+
+  <div class="wrap hero-grid">
+    <div class="title-stack">
+      <p class="eyebrow rv" style="--d:120ms">Pandora · Metkayina reef · 14 years later</p>
+      <div class="title-mini" style="margin-top:1.4rem">Avatar</div>
+      <h1 class="title-main" id="heroTitle" aria-label="The Way of Water">THE WAY OF WATER</h1>
+      <div class="hero-sub rv" style="--d:1100ms">
+        <p>James Cameron takes the camera underwater: the Sully family leaves the Omatikaya forest and learns to breathe where the land ends. A film about water, shot in water — and about the idea that “family is a fortress.”</p>
+      </div>
+      <div class="hero-cta rv" style="--d:1250ms">
+        <a href="#story" class="btn"><span>Begin the descent</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 4v16M6 14l6 6 6-6"/></svg>
+        </a>
+        <a href="#gallery" class="btn ghost"><span>View stills</span></a>
+      </div>
+    </div>
+
+    <aside class="hud rv" style="--d:1400ms">
+      <h4>Logbook · RDA//ARCHIVE</h4>
+      <dl>
+        <dt>Director</dt><dd>James Cameron</dd>
+        <dt>Premiere</dt><dd>December 16, 2022</dd>
+        <dt>Runtime</dt><dd><b>192</b> min</dd>
+        <dt>Frames/sec</dt><dd><b>48</b> HFR</dd>
+        <dt>Budget</dt><dd>$350–460M</dd>
+        <dt>Box office</dt><dd><b>$2.32</b> bn</dd>
+        <dt>Oscar</dt><dd>Visual Effects</dd>
+        <dt>Status</dt><dd style="color:var(--glow)">● Eywa signal</dd>
+      </dl>
+      <div class="hud-foot">
+        <span class="mono" style="font-size:.58rem;letter-spacing:.2em;color:var(--muted)">DEPTH <span id="hudDepth">0</span> m</span>
+        <span style="display:flex;align-items:center;gap:.5rem"><span class="pulse-dot"></span><span class="mono" style="font-size:.58rem;letter-spacing:.2em;color:var(--muted)">REC</span></span>
+      </div>
+    </aside>
+  </div>
+
+  <div class="scroll-cue">
+    <span>Descent</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<!-- ============ 02 · STORY ============ -->
+<section class="sec" id="story">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow rv">Chapter Two</p>
+        <h2 class="sec-title rv" style="--d:80ms">Water has no<br><em>beginning and no end</em></h2>
+      </div>
+      <p class="num rv" style="--d:160ms">02 / STORY</p>
+    </div>
+
+    <div class="story-grid">
+      <div class="story-body rv">
+        <p>More than ten years after the events of the first film, Jake Sully lives with Neytiri and their children in the Omatikaya forest. But the “Sky People” have returned to Pandora — with new technology, new recombinant bodies and an old score to settle with Toruk Makto.</p>
+        <p>To spare the clan from disaster, the family travels east — to the reefs of the Metkayina, the people of the water. There the Sully children learn to hold their breath, ride the ilu and listen to the song of the tulkun. There, too, they learn the price of betrayal: the tulkun hunters are already out on the open sea.</p>
+        <div class="pullquote">
+          “Family is our fortress. Our strength. Our weakness. Everything we have.”
+          <cite>Jake Sully</cite>
+        </div>
+        <p>Cameron shifts the register: instead of a war for the trees, it is a coming-of-age story of Lo’ak and Kiri, a clash between father and son, Neytiri’s maternal fury and the quiet grief of the tulkun Payakan. The finale unfolds inside a sinking ship — a ten-minute sequence for which the entire water simulation system was rebuilt.</p>
+        <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-top:1.6rem;padding-top:1.4rem;border-top:1px dashed rgba(132,169,181,.25)">
+          <div><span class="mono" style="font-size:.58rem;letter-spacing:.2em;color:var(--muted);display:block">GENRE</span><strong>Science fiction · epic</strong></div>
+          <div><span class="mono" style="font-size:.58rem;letter-spacing:.2em;color:var(--muted);display:block">COMPOSER</span><strong>Simon Franglen</strong></div>
+          <div><span class="mono" style="font-size:.58rem;letter-spacing:.2em;color:var(--muted);display:block">STUDIO</span><strong>20th Century · Lightstorm</strong></div>
+        </div>
+      </div>
+
+      <div class="chapters">
+        <article class="chapter rv" style="--d:60ms">
+          <div class="thumb"><span class="no">01</span><img src="https://images.pexels.com/photos/31047092/pexels-photo-31047092.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=300&w=300" alt="Stingray above the reef" loading="lazy"></div>
+          <div><time>Act I · 0–52 min</time><h4>Ash over the forest</h4><p>The return of the RDA, scorched clearings and the decision to leave: the Sully family abandons Omatikaya to save the clan.</p></div>
+        </article>
+        <article class="chapter rv" style="--d:160ms">
+          <div class="thumb"><span class="no">02</span><img src="https://images.pexels.com/photos/3204591/pexels-photo-3204591.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=300&w=300" alt="Blue coral polyps" loading="lazy"></div>
+          <div><time>Act II · 52–118 min</time><h4>The Reef People</h4><p>The Metkayina receive the outsiders warily. Breath, tide, ilu — the children learn to live in the water, while Kiri hears the call of Eywa.</p></div>
+        </article>
+        <article class="chapter rv" style="--d:260ms">
+          <div class="thumb"><span class="no">03</span><img src="https://images.pexels.com/photos/4347287/pexels-photo-4347287.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=300&w=300" alt="Whale tail above the water" loading="lazy"></div>
+          <div><time>Act III · 118–192 min</time><h4>The Tulkun’s Song</h4><p>The hunting platform “Sea Dragon” heads out to hunt. Payakan, Spider and a choice made by Lo’ak lead to a storm.</p></div>
+        </article>
+        <article class="chapter rv" style="--d:360ms">
+          <div class="thumb"><span class="no">04</span><img src="https://images.pexels.com/photos/14775587/pexels-photo-14775587.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=300&w=300" alt="Whale near the surface" loading="lazy"></div>
+          <div><time>Finale · 176–192 min</time><h4>The Sinking Ship</h4><p>The water rises, the bulkheads burst. Neytiri and Quaritch, Tuk and a knife to the throat — and the long ascent toward the light.</p></div>
+        </article>
+        <div class="rv" style="--d:440ms;margin-top:.4rem;padding:1.1rem 1.2rem;border:1px solid rgba(255,95,162,.3);background:linear-gradient(90deg,rgba(255,95,162,.10),transparent)">
+          <p class="mono" style="font-size:.6rem;letter-spacing:.22em;color:var(--bio);text-transform:uppercase;margin:0 0 .4rem">Titan → Pandora</p>
+          <p style="margin:0;font-size:.86rem;color:#c3dde4">Between the two “Avatar” films lie 13 years. Cameron wrote the sequel’s script at the same time as the three other sequels, so that the Sully family’s story would run through all of them.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FULL-WIDTH BAND -->
+<div class="strip">
+  <img src="https://images.pexels.com/photos/31959085/pexels-photo-31959085.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1600" alt="A whale tail disappearing underwater" loading="lazy">
+  <div class="strip-q rv-s">
+    <blockquote>“Water has <b>no beginning</b>, and no end”</blockquote>
+    <span>Tonowari · chief of the Metkayina</span>
+  </div>
+</div>
+
+<!-- ============ 03 · CLANS ============ -->
+<section class="sec" id="clans">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow rv">Two peoples · one Eywa</p>
+        <h2 class="sec-title rv" style="--d:80ms">Clans <em>of Pandora</em></h2>
+      </div>
+      <p class="lead rv" style="--d:160ms;max-width:38ch">The forest teaches you to hide in the leaves. The reef teaches you to breathe in the depths. Choose a clan to see its way of life, totem and abilities.</p>
+    </div>
+
+    <div class="clan-tabs rv" role="tablist" aria-label="Clans">
+      <button class="clan-tab active" role="tab" aria-selected="true" data-clan="0">Omatikaya · forest</button>
+      <button class="clan-tab" role="tab" aria-selected="false" data-clan="1">Metkayina · reef</button>
+    </div>
+
+    <div class="clan-stage rv" style="--d:120ms">
+      <div class="clan-visual" id="clanVisual">
+        <img id="clanImg" src="https://images.pexels.com/photos/26927355/pexels-photo-26927355.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=800&w=1000" alt="Pandora’s reef" loading="lazy">
+        <div class="veil" id="clanVeil" style="background:linear-gradient(120deg,rgba(2,26,16,.72),rgba(1,16,24,.35))"></div>
+        <div class="tagm" id="clanTagm"></div>
+      </div>
+      <div class="clan-body">
+        <div class="clan-panel active" data-panel="0">
+          <h3>Omatikaya</h3>
+          <span class="navi-name">Omatikaya — “the Blue Flute clan”</span>
+          <p>A forest people who lived in Kelutral — Hometree — until it was burned. Hunters and archers bonded with the ikran (banshees) of the Hallelujah Mountains. After the exile the clan settled near the Tree of Souls, and it was here that Jake Sully became Toruk Makto — the Last Shadow Rider.</p>
+          <dl class="spec">
+            <div><dt>Habitat</dt><dd>Rainforests</dd></div>
+            <div><dt>Home</dt><dd>Kelutral → Tree of Souls</dd></div>
+            <div><dt>Companion</dt><dd>Ikran (banshee)</dd></div>
+            <div><dt>Chief</dt><dd>Jake Sully</dd></div>
+            <div><dt>Colors</dt><dd>Indigo + amber stripes</dd></div>
+            <div><dt>Weapons</dt><dd>Bow, spear, knife</dd></div>
+          </dl>
+          <div id="stats0"></div>
+        </div>
+        <div class="clan-panel" data-panel="1">
+          <h3>Metkayina</h3>
+          <span class="navi-name">Metkayina — “the Reef clan”</span>
+          <p>A people of the eastern sea: broad forearms, tail-like braids, skin the color of sea water. They live on islands and in lagoons, dive dozens of meters deep and are bonded with the tulkun — creatures they regard as spiritual kin. Their tsahik Ronal keeps the memory of the clan.</p>
+          <dl class="spec">
+            <div><dt>Habitat</dt><dd>Reefs and archipelago</dd></div>
+            <div><dt>Home</dt><dd>Stilt settlements</dd></div>
+            <div><dt>Companion</dt><dd>Ilu, skimwing</dd></div>
+            <div><dt>Chief</dt><dd>Tonowari</dd></div>
+            <div><dt>Colors</dt><dd>Turquoise + coral dots</dd></div>
+            <div><dt>Weapons</dt><dd>Trident, harpoon</dd></div>
+          </dl>
+          <div id="stats1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 · HEROES ============ -->
+<section class="sec" id="heroes">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow rv">Dramatis personae</p>
+        <h2 class="sec-title rv" style="--d:80ms">The family and <em>those who came for it</em></h2>
+      </div>
+      <p class="num rv" style="--d:160ms">04 / HEROES · HOVER</p>
+    </div>
+    <div class="bento" id="bento"></div>
+  </div>
+</section>
+
+<!-- ============ 05 · CREATURES ============ -->
+<section class="sec" id="creatures">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow rv">Bestiary of the reef</p>
+        <h2 class="sec-title rv" style="--d:80ms">Creatures <em>of the eastern sea</em></h2>
+      </div>
+      <p class="lead rv" style="--d:160ms;max-width:36ch">Every creature on Pandora is part of Eywa’s neural network. Click a name to open the species card.</p>
+    </div>
+    <div class="beast rv">
+      <div class="beast-list" id="beastList" role="tablist" aria-label="Creatures"></div>
+      <div class="beast-view" id="beastView"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 · GALLERY ============ -->
+<section class="sec" id="gallery">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow rv">Atmospheric images of the ocean</p>
+        <h2 class="sec-title rv" style="--d:80ms">The reef <em>in detail</em></h2>
+      </div>
+      <p class="num rv" style="--d:160ms">06 / 08 STILLS · CLICK TO VIEW</p>
+    </div>
+    <div class="gal" id="gal"></div>
+  </div>
+</section>
+
+<!-- ============ 07 · MAKING OF ============ -->
+<section class="sec dossier" id="craft">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow rv">Production dossier</p>
+        <h2 class="sec-title rv" style="--d:80ms">How the water <em>was filmed</em></h2>
+      </div>
+      <p class="lead rv" style="--d:160ms;max-width:40ch">Three years of preparation, four years of shooting and a technology that simply did not exist before “The Way of Water.”</p>
+    </div>
+
+    <div class="tech">
+      <article class="rv" style="--d:40ms">
+        <div class="tno">01</div>
+        <h4>Underwater performance capture</h4>
+        <p>The actors did not perform in front of a dry “blue screen” but in a real tank: cameras, markers and lighting — all underwater. Cameron forbade “dry-for-wet” shooting, where actors imitate swimming on wires.</p>
+        <span class="badge">Motion capture</span>
+      </article>
+      <article class="rv" style="--d:120ms">
+        <div class="tno">02</div>
+        <h4>A 3.4-million-liter tank</h4>
+        <p>900,000 gallons of water, wave generators, a controlled current and temperature. A separate tank was used for scenes inside the sinking ship, where the set was actually turned over.</p>
+        <span class="badge">900 000 gal</span>
+      </article>
+      <article class="rv" style="--d:200ms">
+        <div class="tno">03</div>
+        <h4>Variable 48 fps</h4>
+        <p>HFR switches on in dynamic scenes and drops to 24 in static ones — this removes the strobing effect in underwater action shots without turning the film into a “broadcast.”</p>
+        <span class="badge">48 fps HFR</span>
+      </article>
+      <article class="rv" style="--d:280ms">
+        <div class="tno">04</div>
+        <h4>A new water simulation</h4>
+        <p>Weta FX wrote the solver from scratch: spray, foam, caustics, refraction, interaction between bodies and the surface. A single shot of a tulkun alongside the ship took days to render on the farm.</p>
+        <span class="badge">Weta FX</span>
+      </article>
+      <article class="rv" style="--d:360ms">
+        <div class="tno">05</div>
+        <h4>Diver training</h4>
+        <p>The cast went through freediving training: mask work, static and dynamic apnea underwater. Kate Winslet held her breath for 7 minutes 14 seconds — a record among the film’s actors.</p>
+        <span class="badge">Freediving</span>
+      </article>
+      <article class="rv" style="--d:440ms">
+        <div class="tno">06</div>
+        <h4>Glasses-free 3D on set</h4>
+        <p>Cameron used a next-generation stereo system and monitored the depth of the shot on set, so that the depth of the scene was created during filming rather than in post.</p>
+        <span class="badge">Native 3D</span>
+      </article>
+    </div>
+
+    <div class="blueprint rv">
+      <h4>Scale of production · comparison chart</h4>
+      <div id="bpRows"></div>
+      <p style="margin:1.2rem 0 0;font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;color:#5a7a80;text-transform:uppercase">Values are based on public reports about the production and may be approximate.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 · NUMBERS ============ -->
+<section class="sec" id="numbers">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow rv">Release telemetry</p>
+        <h2 class="sec-title rv" style="--d:80ms">The numbers <em>of big water</em></h2>
+      </div>
+      <p class="num rv" style="--d:160ms">08 / BOX OFFICE</p>
+    </div>
+
+    <div class="nums">
+      <div class="num-card span5 rv" style="--d:40ms">
+        <div class="big">$<span class="cnt" data-to="2.32" data-dec="2">0</span><small>bn</small></div>
+        <div class="lbl">Worldwide box office</div>
+        <div class="sub">The fourth-highest result in film history at the time of release and the second among Cameron’s films.</div>
+      </div>
+      <div class="num-card span3 rv" style="--d:110ms">
+        <div class="big"><span class="cnt" data-to="684">0</span><small>M USD</small></div>
+        <div class="lbl">North America</div>
+      </div>
+      <div class="num-card span4 rv hl" style="--d:180ms">
+        <div class="big"><span class="cnt" data-to="192">0</span><small>min</small></div>
+        <div class="lbl">Runtime</div>
+        <div class="sub">Three hours and twelve minutes — Cameron’s longest film.</div>
+      </div>
+      <div class="num-card span3 rv" style="--d:250ms">
+        <div class="big"><span class="cnt" data-to="13">0</span></div>
+        <div class="lbl">Years between films</div>
+        <div class="sub">“Avatar” — 2009, “The Way of Water” — 2022.</div>
+      </div>
+      <div class="num-card span3 rv" style="--d:320ms">
+        <div class="big"><span class="cnt" data-to="48">0</span><small>fps</small></div>
+        <div class="lbl">High frame rate</div>
+      </div>
+      <div class="num-card span3 rv" style="--d:390ms">
+        <div class="big"><span class="cnt" data-to="7">0</span>:<span class="cnt" data-to="14">0</span></div>
+        <div class="lbl">Breath hold · Winslet</div>
+        <div class="sub">A record among the cast — 7 minutes 14 seconds.</div>
+      </div>
+      <div class="num-card span3 rv" style="--d:460ms">
+        <div class="big"><span class="cnt" data-to="3.3" data-dec="1">0</span><small>bn</small></div>
+        <div class="lbl">Frames rendered</div>
+      </div>
+    </div>
+
+    <div class="chart rv">
+      <h4>Box office by market · $M</h4>
+      <div id="chart"></div>
+      <div class="awards">
+        <div class="award win"><b>Oscar · win</b>Best Visual Effects</div>
+        <div class="award"><b>Oscar · nominations</b>Best Picture, Sound, Production Design</div>
+        <div class="award win"><b>Critics Choice · win</b>Best Visual Effects</div>
+        <div class="award"><b>BAFTA · nomination</b>Best Special Visual Effects</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 · QUOTES ============ -->
+<section class="sec quotes" id="quotes">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:1.6rem">
+      <p class="eyebrow rv">Voices of Pandora</p>
+      <p class="num rv">09 / QUOTES</p>
+    </div>
+    <div class="q-stage rv" id="qStage"></div>
+    <div class="q-nav rv" id="qNav"></div>
+  </div>
+</section>
+
+<!-- ============ 10 · SAGA ============ -->
+<section class="sec" id="saga">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow rv">Five films · one family</p>
+        <h2 class="sec-title rv" style="--d:80ms">The saga <em>of Avatar</em></h2>
+      </div>
+      <p class="saga-hint rv" style="--d:160ms">← scroll the timeline →</p>
+    </div>
+    <div class="saga rv" id="sagaLine">
+      <article class="saga-item done">
+        <span class="st">released</span>
+        <div class="yr">2009</div><h4>Avatar</h4>
+        <p>Jake Sully arrives in the Omatikaya forest and stays. The first film — a 3D revolution and $2.92 billion at the box office.</p>
+      </article>
+      <article class="saga-item done">
+        <span class="st">released</span>
+        <div class="yr">2022</div><h4>The Way of Water</h4>
+        <p>The Metkayina reefs, the tulkun and a war for family. An Oscar for visual effects and $2.32 billion.</p>
+      </article>
+      <article class="saga-item next">
+        <span class="st">released</span>
+        <div class="yr">2025</div><h4>Fire and Ash</h4>
+        <p>Part three: the Ash clan, the volcanic lands of Pandora and the continuing story of Spider and Kiri.</p>
+      </article>
+      <article class="saga-item">
+        <span class="st">planned</span>
+        <div class="yr">2029</div><h4>Avatar 4</h4>
+        <p>Part four with a time jump; the first scenes were already shot together with “The Way of Water.”</p>
+      </article>
+      <article class="saga-item">
+        <span class="st">planned</span>
+        <div class="yr">2031</div><h4>Avatar 5</h4>
+        <p>The finale of the saga — as Cameron envisions it, part of the action moves to Earth.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11 · CONNECTION WITH EYWA ============ -->
+<section class="bond" id="bond">
+  <canvas id="bondCanvas"></canvas>
+  <div class="wrap bond-in">
+    <p class="eyebrow">Interactive · Tsahaylu</p>
+    <h2 class="sec-title">Connect <em style="font-style:normal;font-weight:300;color:var(--muted)">to Eywa’s network</em></h2>
+    <p>Move your cursor (or finger) across the water — the neural threads of the Tree of Souls will follow you. The longer the connection, the brighter the response: Pandora remembers your touch.</p>
+    <div class="bond-meter">
+      <div class="bm-bar"><i id="bmBar"></i></div>
+      <div class="bm-txt" id="bmTxt">Link: 0% · 0 threads</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#dive" class="brand" style="margin-bottom:1rem">
+          <svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <circle cx="20" cy="20" r="18.4" stroke="#63f5d8" stroke-width="1.1" opacity=".55"/>
+            <path d="M4 22c4-5 7-5 11 0s7 5 11 0 7-5 10 0" stroke="#63f5d8" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M6 29c3.6-4.4 6.4-4.4 10 0s6.4 4.4 10 0 6.4-4.4 8 0" stroke="#ff5fa2" stroke-width="1.2" stroke-linecap="round" opacity=".8"/>
+            <circle cx="20" cy="11.5" r="3" fill="#45d9ff"/>
+          </svg>
+          <span class="brand-txt">AVATAR<small>THE WAY OF WATER</small></span>
+        </a>
+        <p style="font-size:.86rem;color:#9dc3cd;max-width:44ch">A fan page about the film “Avatar: The Way of Water” (2022, dir. James Cameron). Built with pure HTML, CSS and JavaScript — without a single frame loaded from a framework.</p>
+      </div>
+      <div>
+        <h5>Sections</h5>
+        <ul>
+          <li><a href="#story">Story</a></li>
+          <li><a href="#clans">Clans of Pandora</a></li>
+          <li><a href="#heroes">Heroes</a></li>
+          <li><a href="#creatures">Bestiary</a></li>
+          <li><a href="#gallery">Stills</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Na’vi phrases</h5>
+        <ul>
+          <li><a href="#quotes">Oel ngati kameie — I see you</a></li>
+          <li><a href="#quotes">Eywa ngahu — May Eywa be with you</a></li>
+          <li><a href="#bond">Tsahaylu — the bond, the link</a></li>
+          <li><a href="#clans">Metkayina — the Reef clan</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <p>Unofficial project · all rights to the film belong to 20th Century Studios and Lightstorm Entertainment · photos: Pexels</p>
+      <a href="#dive" class="top-btn">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="View image">
+  <span class="lb-count" id="lbCount">01 / 08</span>
+  <button class="lb-btn lb-close" id="lbClose" aria-label="Close">✕</button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous">←</button>
+  <figure style="margin:0;display:grid;justify-items:center">
+    <img id="lbImg" src="" alt="">
+    <figcaption class="lb-cap" id="lbCap"></figcaption>
+  </figure>
+  <button class="lb-btn lb-next" id="lbNext" aria-label="Next">→</button>
+</div>
+
+<script>
+/* ============================================================
+   0 · DATA
+   ============================================================ */
+const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const TICKER = [
+  'Oel ngati kameie · I see you','Water connects everything','192 minutes','48 frames/s','$2.32 billion worldwide',
+  'Metkayina clan','Family is our fortress','3.3 billion frames rendered','900,000-gallon tank','Kate Winslet · 7:14 underwater','Eywa ngahu'
+];
+
+const CLAN_STATS = {
+  0:[['Hunting & tracking',88],['Climbing & leaping',94],['Bond with water',34],['Forest stealth',90],['Spiritual practice',78]],
+  1:[['Hunting & tracking',72],['Swimming & diving',99],['Bond with water',96],['Forest stealth',41],['Spiritual practice',86]]
+};
+const CLAN_IMGS = [
+  'https://images.pexels.com/photos/26927355/pexels-photo-26927355.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=800&w=1000',
+  'https://images.pexels.com/photos/31895961/pexels-photo-31895961.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=800&w=1000'
+];
+const CLAN_VEIL = [
+  'linear-gradient(120deg,rgba(2,26,16,.74),rgba(1,16,24,.32))',
+  'linear-gradient(120deg,rgba(1,32,44,.76),rgba(2,14,22,.3))'
+];
+const TOTEM = {
+  0:`<svg viewBox="0 0 100 100" fill="none" stroke="#63f5d8" stroke-width="2"><path d="M50 8v84M50 22c14 0 22 8 22 18s-10 14-22 14M50 40c-14 0-22 8-22 18s10 14 22 14"/><circle cx="50" cy="10" r="5" fill="#63f5d8" stroke="none"/><path d="M36 78h28" stroke="#ff5fa2"/></svg>`,
+  1:`<svg viewBox="0 0 100 100" fill="none" stroke="#63f5d8" stroke-width="2"><path d="M8 62c10-14 22-14 32 0s22 14 32 0 14-10 20-2"/><path d="M14 78c9-12 19-12 28 0s19 12 28 0 12-8 18-2" stroke="#ff5fa2"/><circle cx="50" cy="30" r="10"/><path d="M50 20v-8M42 26l-6-6M58 26l6-6"/></svg>`
+};
+
+const HEROES = [
+  {n:'Jake Sully',r:'Toruk Makto · olo’eyktan of the Omatikaya',a:'Sam Worthington',sp:'span7 tall',c:'#45d9ff',d:'A former Marine turned chieftain. He tries to be a father and a commander at once — and fails at both when a hunter comes for his family.'},
+  {n:'Neytiri',r:'Daughter of the Omatikaya clan',a:'Zoe Saldaña',sp:'span5 tall',c:'#ff5fa2',d:'Archer, mother, fury. Her revenge in the finale is not a plot device but the answer to the loss of her eldest son Neteyam.'},
+  {n:'Kiri',r:'Daughter of Grace Augustine',a:'Sigourney Weaver',sp:'span4',c:'#63f5d8',d:'A teenager born of Grace’s avatar. She hears Eywa directly, suffers seizures and searches for her origins.'},
+  {n:'Lo’ak',r:'Younger son of the Sullys',a:'Britain Dalton',sp:'span4',c:'#ffb454',d:'Forever in the shadow of his father and his dead brother. His friendship with the tulkun Payakan — an outcast among his own — makes him the film’s main hero.'},
+  {n:'Tonowari',r:'Chief of the Metkayina',a:'Cliff Curtis',sp:'span4',c:'#45d9ff',d:'He accepted the Sully family although he knew the price. “Water has no beginning and no end” is his philosophy and his mistake at the moment of bargaining with Quaritch.'},
+  {n:'Ronal',r:'Tsahik of the Reef clan',a:'Kate Winslet',sp:'span5',c:'#ff5fa2',d:'A pregnant shaman and keeper of memory. She distrusts outsiders, yet in the finale she carries the whole Sully family on her shoulders.'},
+  {n:'Spider',r:'Miles Socorro · Quaritch’s son',a:'Jack Champion',sp:'span3',c:'#63f5d8',d:'A human teenager raised among the Na’vi who cannot breathe Pandora’s air without a mask. He chooses the father he hates.'},
+  {n:'Miles Quaritch',r:'Recombinant · memory avatar',a:'Stephen Lang',sp:'span5',c:'#ff7a4d',d:'A copy of the colonel in an avatar body. He hunts Jake but gains a son — and in that conflict becomes almost human.'},
+  {n:'General Ardmore',r:'RDA command',a:'Edie Falco',sp:'span3',c:'#ffb454',d:'The cold logic of colonization: terraforming matters more than revenge. She ordered the hunt for tulkun to obtain an anti-aging enzyme.'},
+  {n:'Mick Scoresby',r:'Captain of the “Sea Dragon”',a:'Brendan Cowell',sp:'span4',c:'#45d9ff',d:'A tulkun hunter. His platform is the most terrifying machine in the film: industrial killing shot as a work process.'}
+];
+
+const BEASTS = [
+  {n:'Tulkun',l:'Tulkun',d:'A gigantic whale-like creature with two pairs of flippers and a complex social structure. Tulkun are considered wiser than humans: they have history, songs, names and a law of “no violence.” The Metkayina call them spiritual kin, and the outcast Payakan becomes Lo’ak’s friend.',
+   s:[['Size',96],['Intelligence',99],['Danger',44],['Bond with Na’vi',100]],
+   p:'M26,138 C58,100 132,74 244,76 C338,78 424,92 500,108 C524,113 540,114 552,112 L616,68 C630,58 640,68 632,80 L600,120 L634,156 C644,168 632,180 618,172 L552,138 C524,152 472,172 380,184 C276,198 156,190 88,170 C48,158 24,150 26,138 Z M246,156 C258,196 240,224 208,236 C222,204 226,178 224,158 Z M300,86 C312,62 330,52 348,50 C336,66 332,80 334,92 Z'},
+  {n:'Ilu',l:'Ilu · sea dragon',d:'A swift fish-like creature with two pairs of pectoral fins and a long body. The Metkayina’s main “riding” animal: they hunt on ilu, patrol the reef and head out to open sea. The tsahaylu bond with an ilu is made through the braid at the back of the head.',
+   s:[['Size',52],['Intelligence',74],['Danger',30],['Speed',97]],
+   p:'M20,60 C60,34 130,26 200,38 C260,48 320,44 372,28 C384,24 388,34 378,40 C350,56 320,64 296,64 C330,72 356,84 368,98 C374,106 364,112 356,104 C336,86 300,74 260,76 C200,80 120,96 66,84 C34,77 16,70 20,60 Z'},
+  {n:'Skimwing',l:'Skimwing · “gliding wing”',d:'A flat creature with broad “wings” that glides across the water surface and dives under the wave. Young Na’vi go through an initiation rite — the skimwing hunt: it can only be caught and ridden on the open sea, in a storm.',
+   s:[['Size',44],['Intelligence',58],['Danger',72],['Speed',90]],
+   p:'M40,70 C90,30 180,18 260,40 C320,56 372,52 410,34 L430,60 C392,74 340,82 300,74 C330,96 350,120 356,146 L318,150 C300,120 268,96 226,88 C160,76 92,86 40,70 Z'},
+  {n:'Raider shark',l:'Akula',d:'A predator of the reef waters: armored head, a double row of fins and a habit of attacking from the depths. Sharks hunt in packs and sense vibration — which is why the Metkayina move through the water slowly and “quietly.”',
+   s:[['Size',68],['Intelligence',46],['Danger',95],['Speed',88]],
+   p:'M30,80 C80,50 170,42 250,58 C310,70 366,66 414,44 L436,72 L410,86 L444,112 L414,124 C356,104 300,100 250,108 C170,120 80,112 30,80 Z M196,58 C206,26 226,14 250,10 C240,32 238,48 244,62 Z'},
+  {n:'Glowing jellyfish',l:'Atokirina · seed of the Tree of Souls',d:'Translucent creatures that carry particles of Eywa. In the forest they settle on the shoulders of the chosen, and in the water their swarms form living fields of light — a navigation landmark for Metkayina divers and a sign that the network hears you.',
+   s:[['Size',12],['Intelligence',40],['Danger',4],['Glow',100]],
+   p:'M200,30 C270,30 320,80 320,140 L80,140 C80,80 130,30 200,30 Z M120,146 C112,190 128,214 118,252 M164,146 C158,196 176,220 166,262 M206,146 C200,200 216,226 206,268 M248,146 C244,196 258,220 250,258 M286,146 C282,190 294,212 288,248'}
+];
+
+const GAL = [
+  {u:'https://images.pexels.com/photos/31895961/pexels-photo-31895961.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1400',c:'Reef at dawn · Metkayina lagoon',cls:'g1'},
+  {u:'https://images.pexels.com/photos/31047092/pexels-photo-31047092.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=800',c:'Stingray above the corals · ilu patrol',cls:'g2'},
+  {u:'https://images.pexels.com/photos/39259370/pexels-photo-39259370.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=800',c:'Glowing anemones · night reef',cls:'g3'},
+  {u:'https://images.pexels.com/photos/3204591/pexels-photo-3204591.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=640&w=800',c:'Polyps · the Tree of Souls underwater',cls:'g4'},
+  {u:'https://images.pexels.com/photos/4347287/pexels-photo-4347287.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=640&w=800',c:'Tulkun tail · the whale’s song',cls:'g5'},
+  {u:'https://images.pexels.com/photos/13010779/pexels-photo-13010779.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=640&w=800',c:'School by the cliff · hunting waters',cls:'g6'},
+  {u:'https://images.pexels.com/photos/38156461/pexels-photo-38156461.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=900',c:'Surface · coming up for air',cls:'g7'},
+  {u:'https://images.pexels.com/photos/29038798/pexels-photo-29038798.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=900',c:'Coral garden · reef village',cls:'g8'}
+];
+
+const BP = [
+  ['Tank volume','3.4 million liters of water on set',100],
+  ['Shooting period','≈ 4 years of work on the sequels',86],
+  ['Frame rate','48 fps in motion, 24 fps in static shots',64],
+  ['Render farm','3.3 billion frames via Weta FX',94],
+  ['Underwater capture','Full scenes shot underwater',78],
+  ['Cast freediving','7 min 14 s — Kate Winslet’s record',52]
+];
+
+const CHART = [
+  ['USA & Canada',684],['China',254],['France',153],['Germany',148],['South Korea',108],['United Kingdom',76],['India',60],['Australia',50],['Brazil',45],['Mexico',48]
+];
+
+const QUOTES = [
+  {t:'“Water has <b>no beginning</b>, and no end”',w:'Tonowari',n:'Metkayina'},
+  {t:'“I <b>see</b> you”',w:'Neytiri · to Jake',n:'Oel ngati kameie'},
+  {t:'“Family is a <b>fortress</b>. Everything we have”',w:'Jake Sully',n:'Toruk Makto'},
+  {t:'“Eywa <b>hears</b> me. I know”',w:'Kiri',n:'Daughter of Grace Augustine'},
+  {t:'“We cannot <b>run</b> from the Sky People”',w:'Neytiri',n:'Omatikaya'}
+];
+
+/* ============================================================
+   1 · UTILITIES
+   ============================================================ */
+const $ = (s,c=document)=>c.querySelector(s);
+const $$ = (s,c=document)=>[...c.querySelectorAll(s)];
+const rnd = (a,b)=>a+Math.random()*(b-a);
+
+/* ============================================================
+   2 · TICKER
+   ============================================================ */
+(function ticker(){
+  const t=$('#tickerTrack'); const half = TICKER.map(x=>`<i>${x}</i>`).join('');
+  t.innerHTML = half+half;
+})();
+
+/* ============================================================
+   3 · BACKGROUND CANVAS: plankton + marine snow
+   ============================================================ */
+(function sea(){
+  const cv=$('#sea'), ctx=cv.getContext('2d');
+  let W=0,H=0,DPR=1,parts=[],jellies=[],mouse={x:-999,y:-999,act:false};
+  const COLORS=['#63f5d8','#45d9ff','#ff5fa2','#ffb454','#9be8ff'];
+
+  function size(){
+    DPR=Math.min(window.devicePixelRatio||1,2);
+    W=cv.clientWidth; H=cv.clientHeight;
+    cv.width=W*DPR; cv.height=H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  function build(){
+    parts=[];
+    const n = Math.round(Math.min(130, Math.max(50, W*H/13000)));
+    for(let i=0;i<n;i++){
+      const bio = Math.random()<0.42;
+      parts.push({
+        x:Math.random()*W, y:Math.random()*H,
+        r: bio? rnd(1.1,3.1) : rnd(.4,1.5),
+        vx: rnd(-.14,.14), vy: bio? rnd(-.28,-.05) : rnd(.05,.28),
+        a: rnd(.18,.75), ph: Math.random()*Math.PI*2, sp: rnd(.4,1.4),
+        c: COLORS[(Math.random()*COLORS.length)|0], bio
+      });
+    }
+    jellies=[];
+    for(let i=0;i<5;i++){
+      jellies.push({x:Math.random()*W,y:Math.random()*H+H*.2,r:rnd(46,110),vx:rnd(-.14,.14),vy:rnd(-.16,-.04),a:rnd(.03,.075),c:Math.random()<.4?'#ff5fa2':'#45d9ff'});
+    }
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    // soft light spots
+    ctx.globalCompositeOperation='lighter';
+    jellies.forEach(j=>{
+      j.x+=j.vx; j.y+=j.vy;
+      if(j.y<-j.r*2){j.y=H+j.r; j.x=Math.random()*W}
+      if(j.x<-j.r*2)j.x=W+j.r; if(j.x>W+j.r*2)j.x=-j.r;
+      const g=ctx.createRadialGradient(j.x,j.y,0,j.x,j.y,j.r);
+      g.addColorStop(0,hexA(j.c,j.a));
+      g.addColorStop(1,hexA(j.c,0));
+      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(j.x,j.y,j.r,0,6.2832); ctx.fill();
+    });
+    // links between nearby bio-particles
+    ctx.lineWidth=.55;
+    for(let i=0;i<parts.length;i++){
+      const p=parts[i]; if(!p.bio) continue;
+      for(let k=i+1;k<parts.length;k++){
+        const q=parts[k]; if(!q.bio) continue;
+        const dx=p.x-q.x, dy=p.y-q.y, d2=dx*dx+dy*dy;
+        if(d2<9000){
+          ctx.strokeStyle=hexA('#63f5d8',(1-d2/9000)*0.13);
+          ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke();
+        }
+      }
+    }
+    // particles
+    parts.forEach(p=>{
+      p.ph+=0.02*p.sp;
+      p.x+=p.vx+Math.sin(p.ph)*0.16; p.y+=p.vy+Math.cos(p.ph*0.7)*0.1;
+      if(mouse.act){
+        const dx=p.x-mouse.x, dy=p.y-mouse.y, d=Math.hypot(dx,dy);
+        if(d<140){ const f=(1-d/140)*(p.bio?0.9:0.35); p.x+=dx/d*f*2.4; p.y+=dy/d*f*2.4; }
+      }
+      if(p.x<-12)p.x=W+12; if(p.x>W+12)p.x=-12;
+      if(p.y<-12)p.y=H+12; if(p.y>H+12)p.y=-12;
+      const tw = p.bio ? p.a*(0.55+0.45*Math.sin(p.ph*1.7)) : p.a*0.65;
+      if(p.bio){
+        const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*6);
+        g.addColorStop(0,hexA(p.c,tw)); g.addColorStop(.35,hexA(p.c,tw*.35)); g.addColorStop(1,hexA(p.c,0));
+        ctx.fillStyle=g; ctx.beginPath(); ctx.arc(p.x,p.y,p.r*6,0,6.2832); ctx.fill();
+      }
+      ctx.fillStyle=hexA(p.bio?p.c:'#dff2f5',tw);
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.2832); ctx.fill();
+    });
+    ctx.globalCompositeOperation='source-over';
+    raf=requestAnimationFrame(draw);
+  }
+  function hexA(hex,a){
+    const h=hex.replace('#',''); const n=parseInt(h,16);
+    return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`;
+  }
+  let raf;
+  function start(){ if(!raf) raf=requestAnimationFrame(draw); }
+  function stop(){ cancelAnimationFrame(raf); raf=null; }
+
+  window.addEventListener('resize',()=>{size();build()});
+  window.addEventListener('pointermove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;mouse.act=true},{passive:true});
+  window.addEventListener('pointerleave',()=>mouse.act=false);
+  document.addEventListener('visibilitychange',()=>document.hidden?stop():start());
+  size();build(); if(!REDUCED) start(); else draw(), stop();
+})();
+
+/* ============================================================
+   4 · NAVIGATION / MENU / ACTIVE SECTION
+   ============================================================ */
+(function nav(){
+  const nv=$('#nav'), burger=$('#burger'), mm=$('#mobileMenu');
+  const onScroll=()=>nv.classList.toggle('stuck',window.scrollY>40);
+  onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
+  burger.addEventListener('click',()=>{
+    const open=mm.classList.toggle('open');
+    burger.setAttribute('aria-expanded',open);
+    burger.style.color = open ? '#63f5d8':'';
+  });
+  $$('#mobileMenu a').forEach(a=>a.addEventListener('click',()=>{mm.classList.remove('open');burger.setAttribute('aria-expanded',false)}));
+
+  const links=$$('#navLinks a');
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting){
+        links.forEach(l=>l.classList.toggle('active', l.getAttribute('href')==='#'+e.target.id));
+      }
+    });
+  },{rootMargin:'-45% 0px -50% 0px'});
+  ['dive','story','clans','heroes','creatures','gallery','craft','numbers','saga'].forEach(id=>{const el=document.getElementById(id); el&&io.observe(el)});
+})();
+
+/* ============================================================
+   5 · DEPTH GAUGE
+   ============================================================ */
+(function depth(){
+  const ticks=$('#depthTicks'), marker=$('#depthMarker'), val=$('#depthVal'), zone=$('#depthZone'), hud=$('#hudDepth');
+  for(let i=1;i<11;i++){const t=document.createElement('i'); t.style.top=(i*10)+'%'; ticks.appendChild(t)}
+  const ZONES=[[0,'EPIPELAGIC'],[200,'TWILIGHT'],[700,'MIDNIGHT'],[1500,'ABYSS'],[2400,'EYWA’S NETWORK']];
+  let last=-1;
+  function upd(){
+    const max=document.documentElement.scrollHeight-window.innerHeight;
+    const p=max>0?Math.min(1,Math.max(0,window.scrollY/max)):0;
+    const d=Math.round(p*3000);
+    marker.style.top=(p*100)+'%';
+    if(d!==last){ val.textContent=d; hud.textContent=d; last=d; }
+    let z=ZONES[0][1]; for(const [th,name] of ZONES){ if(d>=th) z=name }
+    zone.textContent=z;
+  }
+  upd(); window.addEventListener('scroll',upd,{passive:true}); window.addEventListener('resize',upd);
+})();
+
+/* ============================================================
+   6 · REVEAL
+   ============================================================ */
+const revealIO=new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); revealIO.unobserve(e.target) } });
+},{threshold:.16,rootMargin:'0px 0px -8% 0px'});
+function observeReveals(root=document){ $$('.rv,.rv-x,.rv-s',root).forEach(el=>revealIO.observe(el)) }
+
+/* ============================================================
+   7 · HEROES: bento with bioluminescent pattern
+   ============================================================ */
+(function heroes(){
+  const b=$('#bento');
+  b.innerHTML=HEROES.map((h,i)=>{
+    const dots=Array.from({length:26},()=>{
+      const cx=rnd(4,96), cy=rnd(4,96), r=rnd(.5,2.1), o=rnd(.15,.8), d=rnd(0,4);
+      return `<circle cx="${cx}%" cy="${cy}%" r="${r}" fill="${h.c}" opacity="${o}"><animate attributeName="opacity" values="${o};${Math.min(1,o+.4)};${o}" dur="${rnd(2.6,6).toFixed(1)}s" begin="${d.toFixed(1)}s" repeatCount="indefinite"/></circle>`;
+    }).join('');
+    return `<article class="card ${h.sp} rv" style="--d:${i*70}ms" data-i="${i}">
+      <span class="glowblob" style="background:${h.c};top:-40px;right:-30px"></span>
+      <svg class="dots" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">${dots}</svg>
+      <span class="idx">${String(i+1).padStart(2,'0')}</span>
+      <svg class="glyph" viewBox="0 0 40 40" fill="none" stroke="${h.c}" stroke-width="1.4" aria-hidden="true">
+        <circle cx="20" cy="20" r="14" opacity=".5"/><path d="M6 24c4-5 7-5 11 0s7 5 11 0 7-5 6 0" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <div class="role">${h.r}</div>
+        <h3>${h.n}</h3>
+        <div class="actor">${h.a}</div>
+        <p>${h.d}</p>
+      </div>
+    </article>`;
+  }).join('');
+  $$('.card',b).forEach(c=>{
+    c.addEventListener('pointermove',e=>{
+      const r=c.getBoundingClientRect();
+      const g=$('.glowblob',c);
+      g.style.left=(e.clientX-r.left-85)+'px'; g.style.top=(e.clientY-r.top-85)+'px';
+    });
+    c.addEventListener('click',()=>c.classList.toggle('open'));
+  });
+  observeReveals(b);
+})();
+
+/* ============================================================
+   8 · CLANS
+   ============================================================ */
+(function clans(){
+  const mkStats=(arr)=>arr.map(([k,v])=>`<div class="stat"><span class="stat-k">${k}</span><div class="bar"><i style="--w:${v}%"></i></div><b>${v}</b></div>`).join('');
+  $('#stats0').innerHTML=mkStats(CLAN_STATS[0]);
+  $('#stats1').innerHTML=mkStats(CLAN_STATS[1]);
+  $('#clanTagm').innerHTML=TOTEM[0];
+
+  const tabs=$$('.clan-tab'), img=$('#clanImg'), veil=$('#clanVeil'), tagm=$('#clanTagm');
+  function activate(i){
+    tabs.forEach(t=>{const on=+t.dataset.clan===i; t.classList.toggle('active',on); t.setAttribute('aria-selected',on)});
+    $$('.clan-panel').forEach(p=>p.classList.toggle('active',+p.dataset.panel===i));
+    img.style.opacity=0;
+    setTimeout(()=>{ img.src=CLAN_IMGS[i]; img.style.opacity=1 },260);
+    veil.style.background=CLAN_VEIL[i];
+    tagm.innerHTML=TOTEM[i];
+    tagm.style.animation='none'; void tagm.offsetWidth; tagm.style.animation='fadeUp .7s var(--ease)';
+    // restart the stripes
+    const bars=$$('.clan-panel.active .bar i');
+    bars.forEach(b=>{b.style.width=0});
+    requestAnimationFrame(()=>setTimeout(()=>bars.forEach(b=>b.style.width=b.style.getPropertyValue('--w')),60));
+  }
+  tabs.forEach(t=>t.addEventListener('click',()=>activate(+t.dataset.clan)));
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){activate(0);io.disconnect()}})},{threshold:.25});
+  io.observe($('#clans'));
+})();
+
+/* ============================================================
+   9 · BESTIARY
+   ============================================================ */
+(function beasts(){
+  const list=$('#beastList'), view=$('#beastView');
+  list.innerHTML=BEASTS.map((b,i)=>`<button role="tab" data-i="${i}" class="${i===0?'active':''}" aria-selected="${i===0}">
+      <span class="bn">${String(i+1).padStart(2,'0')}</span>
+      <span><span class="bname">${b.n}</span><span class="blat">${b.l}</span></span>
+    </button>`).join('');
+  function show(i){
+    const b=BEASTS[i];
+    $$('#beastList button').forEach(btn=>{const on=+btn.dataset.i===i;btn.classList.toggle('active',on);btn.setAttribute('aria-selected',on)});
+    view.innerHTML=`<div class="fade-swap">
+        <div class="art"><svg viewBox="0 0 460 260"><path d="${b.p}"/></svg></div>
+        <h3>${b.n}</h3><span class="lat">${b.l}</span>
+        <p>${b.d}</p>
+        <div class="beast-stats">${b.s.map(([k,v])=>`<div class="stat"><span class="stat-k">${k}</span><div class="bar"><i style="--w:${v}%"></i></div><b>${v}</b></div>`).join('')}</div>
+      </div>`;
+    requestAnimationFrame(()=>setTimeout(()=>$$('#beastView .bar i').forEach(el=>el.style.width=el.style.getPropertyValue('--w')),80));
+  }
+  list.addEventListener('click',e=>{const btn=e.target.closest('button'); if(btn) show(+btn.dataset.i)});
+  show(0);
+})();
+
+/* ============================================================
+   10 · GALLERY + LIGHTBOX
+   ============================================================ */
+(function gallery(){
+  const g=$('#gal');
+  g.innerHTML=GAL.map((x,i)=>`<figure class="gi ${x.cls} rv-s" style="--d:${i*60}ms" data-i="${i}" tabindex="0" role="button" aria-label="Open image: ${x.c}">
+      <img src="${x.u}" alt="${x.c}" loading="lazy">
+      <figcaption>${String(i+1).padStart(2,'0')} · ${x.c}</figcaption>
+    </figure>`).join('');
+  observeReveals(g);
+
+  const lb=$('#lightbox'), img=$('#lbImg'), cap=$('#lbCap'), cnt=$('#lbCount');
+  let cur=0;
+  function open(i){
+    cur=(i+GAL.length)%GAL.length;
+    img.src=GAL[cur].u; img.alt=GAL[cur].c; cap.textContent=GAL[cur].c;
+    cnt.textContent=String(cur+1).padStart(2,'0')+' / '+String(GAL.length).padStart(2,'0');
+    lb.classList.add('open'); document.body.style.overflow='hidden';
+  }
+  function close(){ lb.classList.remove('open'); document.body.style.overflow=''; }
+  g.addEventListener('click',e=>{const f=e.target.closest('.gi'); if(f) open(+f.dataset.i)});
+  g.addEventListener('keydown',e=>{if(e.key==='Enter'){const f=e.target.closest('.gi'); if(f) open(+f.dataset.i)}});
+  $('#lbClose').addEventListener('click',close);
+  $('#lbPrev').addEventListener('click',()=>open(cur-1));
+  $('#lbNext').addEventListener('click',()=>open(cur+1));
+  lb.addEventListener('click',e=>{if(e.target===lb)close()});
+  document.addEventListener('keydown',e=>{
+    if(!lb.classList.contains('open'))return;
+    if(e.key==='Escape')close(); if(e.key==='ArrowLeft')open(cur-1); if(e.key==='ArrowRight')open(cur+1);
+  });
+})();
+
+/* ============================================================
+   11 · DOSSIER + CHARTS
+   ============================================================ */
+(function craft(){
+  $('#bpRows').innerHTML=BP.map(([k,v,p])=>`<div class="bp-row">
+      <span class="k">${k}</span><span class="bp-bar"><i style="--w:${p}%"></i></span><span class="v">${p}%</span>
+    </div><div class="bp-row" style="border:0;padding:0;margin-top:-.35rem"><span></span><span style="font-family:var(--mono);font-size:.62rem;color:#5a7a80">${v}</span><span></span></div>`).join('');
+
+  const max=Math.max(...CHART.map(c=>c[1]));
+  $('#chart').innerHTML=CHART.map(([k,v])=>`<div class="crow">
+      <span class="cn">${k}</span><span class="cb"><i style="--w:${(v/max*100).toFixed(1)}%"></i></span><span class="cv">$${v}</span>
+    </div>`).join('');
+
+  const bars=new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){
+      $$('.bp-bar i,.cb i',e.target).forEach((el,i)=>setTimeout(()=>el.style.width=el.style.getPropertyValue('--w'), i*70));
+      bars.unobserve(e.target);
+    }});
+  },{threshold:.2});
+  bars.observe($('.blueprint')); bars.observe($('.chart'));
+})();
+
+/* ============================================================
+   12 · COUNTERS
+   ============================================================ */
+(function counters(){
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(!e.isIntersecting) return;
+      const el=e.target, to=parseFloat(el.dataset.to), dec=+(el.dataset.dec||0), dur=1500;
+      const t0=performance.now();
+      (function step(t){
+        const p=Math.min(1,(t-t0)/dur), v=to*(1-Math.pow(1-p,3));
+        el.textContent = dec? v.toFixed(dec) : Math.round(v).toLocaleString('en-US');
+        if(p<1) requestAnimationFrame(step);
+      })(t0);
+      io.unobserve(el);
+    });
+  },{threshold:.5});
+  $$('.cnt').forEach(el=>io.observe(el));
+})();
+
+/* ============================================================
+   13 · QUOTES
+   ============================================================ */
+(function quotes(){
+  const stage=$('#qStage'), nav=$('#qNav');
+  stage.innerHTML=QUOTES.map((q,i)=>`<div class="q-slide ${i===0?'active':''}">
+      <blockquote>${q.t}</blockquote>
+      <div class="who">${q.w}</div><div class="navi">${q.n}</div>
+    </div>`).join('');
+  nav.innerHTML=QUOTES.map((_,i)=>`<button class="q-dot ${i===0?'active':''}" data-i="${i}" aria-label="Quote ${i+1}"></button>`).join('')
+    +`<button class="q-arrow" id="qPrev" aria-label="Previous quote">←</button><button class="q-arrow" id="qNext" aria-label="Next quote">→</button>`;
+  const slides=$$('.q-slide',stage), dots=$$('.q-dot',nav);
+  let i=0, timer;
+  function go(n){
+    i=(n+slides.length)%slides.length;
+    slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+    dots.forEach((d,k)=>d.classList.toggle('active',k===i));
+  }
+  function auto(){ clearInterval(timer); if(!REDUCED) timer=setInterval(()=>go(i+1),6400) }
+  dots.forEach(d=>d.addEventListener('click',()=>{go(+d.dataset.i);auto()}));
+  $('#qPrev').addEventListener('click',()=>{go(i-1);auto()});
+  $('#qNext').addEventListener('click',()=>{go(i+1);auto()});
+  stage.addEventListener('pointerenter',()=>clearInterval(timer));
+  stage.addEventListener('pointerleave',auto);
+  auto();
+})();
+
+/* ============================================================
+   14 · CONNECTION WITH EYWA (interactive canvas)
+   ============================================================ */
+(function bond(){
+  const cv=$('#bondCanvas'), ctx=cv.getContext('2d');
+  const bar=$('#bmBar'), txt=$('#bmTxt');
+  let W=0,H=0,DPR=1,nodes=[],sparks=[],running=false,charge=0,threads=0;
+  const last={x:null,y:null};
+
+  function size(){
+    DPR=Math.min(window.devicePixelRatio||1,2);
+    const r=cv.getBoundingClientRect(); W=r.width; H=r.height;
+    cv.width=W*DPR; cv.height=H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  function addNode(x,y){
+    nodes.push({x,y,life:1,r:rnd(1.4,3.4)});
+    if(nodes.length>260) nodes.shift();
+    threads=Math.min(threads+1,999);
+    charge=Math.min(100,charge+0.9);
+    for(let i=0;i<3;i++) sparks.push({x,y,vx:rnd(-1.4,1.4),vy:rnd(-1.4,1.4),life:1,r:rnd(.6,2),c:Math.random()<.3?'#ff5fa2':'#63f5d8'});
+  }
+  function pointer(e){
+    const r=cv.getBoundingClientRect();
+    const x=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
+    const y=(e.touches?e.touches[0].clientY:e.clientY)-r.top;
+    if(last.x===null){ last.x=x; last.y=y; return }
+    const d=Math.hypot(x-last.x,y-last.y);
+    if(d>5){ addNode(x,y); last.x=x; last.y=y }
+  }
+  cv.addEventListener('pointermove',pointer,{passive:true});
+  cv.addEventListener('pointerdown',e=>{const r=cv.getBoundingClientRect();addNode(e.clientX-r.left,e.clientY-r.top)});
+  cv.addEventListener('pointerleave',()=>{last.x=last.y=null});
+  cv.addEventListener('touchmove',e=>{pointer(e);},{passive:true});
+
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    ctx.globalCompositeOperation='lighter';
+    // threads
+    for(let i=1;i<nodes.length;i++){
+      const a=nodes[i-1], b=nodes[i];
+      const al=Math.min(a.life,b.life);
+      if(al<=0) continue;
+      const mx=(a.x+b.x)/2 + Math.sin((i+performance.now()/900))*7;
+      const my=(a.y+b.y)/2 + Math.cos((i+performance.now()/700))*7;
+      ctx.strokeStyle=`rgba(99,245,216,${al*0.55})`;
+      ctx.lineWidth=Math.max(.4,al*2.2);
+      ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.quadraticCurveTo(mx,my,b.x,b.y); ctx.stroke();
+      if(i%9===0){
+        const g=ctx.createRadialGradient(b.x,b.y,0,b.x,b.y,26);
+        g.addColorStop(0,`rgba(120,255,230,${al*0.34})`); g.addColorStop(1,'rgba(120,255,230,0)');
+        ctx.fillStyle=g; ctx.beginPath(); ctx.arc(b.x,b.y,26,0,6.2832); ctx.fill();
+      }
+    }
+    nodes.forEach(n=>{
+      n.life-=0.0055;
+      ctx.fillStyle=`rgba(200,255,248,${Math.max(0,n.life)})`;
+      ctx.beginPath(); ctx.arc(n.x,n.y,n.r*n.life,0,6.2832); ctx.fill();
+    });
+    sparks.forEach(s=>{
+      s.x+=s.vx; s.y+=s.vy; s.vy-=0.012; s.life-=0.02;
+      ctx.fillStyle=`rgba(${parseInt(s.c.slice(1,3),16)},${parseInt(s.c.slice(3,5),16)},${parseInt(s.c.slice(5,7),16)},${Math.max(0,s.life)})`;
+      ctx.beginPath(); ctx.arc(s.x,s.y,s.r*s.life,0,6.2832); ctx.fill();
+    });
+    nodes=nodes.filter(n=>n.life>0); sparks=sparks.filter(s=>s.life>0);
+    charge=Math.max(0,charge-0.18);
+    bar.style.width=charge+'%';
+    txt.textContent=`Link: ${Math.round(charge)}% · ${threads} threads`+(charge>92?' · EYWA RESPONDS':'');
+    ctx.globalCompositeOperation='source-over';
+    if(running) requestAnimationFrame(frame);
+  }
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting && !running){ running=true; requestAnimationFrame(frame) }
+      else if(!e.isIntersecting && running){ running=false }
+    });
+  },{threshold:.05});
+  io.observe(cv);
+  window.addEventListener('resize',size); size();
+})();
+
+/* ============================================================
+   15 · OCEAN SOUND (WebAudio, on click)
+   ============================================================ */
+(function ocean(){
+  const btn=$('#soundBtn');
+  let ctxA=null, on=false, nodes=[], bubbleTimer=null;
+  const mut=$('.mut',btn), wv=$('.wv',btn);
+  function start(){
+    ctxA=new (window.AudioContext||window.webkitAudioContext)();
+    const master=ctxA.createGain(); master.gain.value=0; master.connect(ctxA.destination);
+    // surf noise
+    const len=ctxA.sampleRate*4, buf=ctxA.createBuffer(1,len,ctxA.sampleRate), data=buf.getChannelData(0);
+    let lastv=0;
+    for(let i=0;i<len;i++){ const w=Math.random()*2-1; lastv=(lastv*0.96)+w*0.04; data[i]=lastv*3.2 }
+    const src=ctxA.createBufferSource(); src.buffer=buf; src.loop=true;
+    const lp=ctxA.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=520; lp.Q.value=.7;
+    const swell=ctxA.createGain(); swell.gain.value=.5;
+    src.connect(lp); lp.connect(swell); swell.connect(master); src.start();
+    // slow filter breathing
+    const lfo=ctxA.createOscillator(), lfoG=ctxA.createGain();
+    lfo.frequency.value=0.07; lfoG.gain.value=260; lfo.connect(lfoG); lfoG.connect(lp.frequency); lfo.start();
+    const lfo2=ctxA.createOscillator(), lfo2G=ctxA.createGain();
+    lfo2.frequency.value=0.045; lfo2G.gain.value=.32; lfo2.connect(lfo2G); lfo2G.connect(swell.gain); lfo2.start();
+    // low rumble
+    const drone=ctxA.createOscillator(), dg=ctxA.createGain();
+    drone.type='sine'; drone.frequency.value=54; dg.gain.value=.09;
+    drone.connect(dg); dg.connect(master); drone.start();
+    master.gain.linearRampToValueAtTime(.34, ctxA.currentTime+2.2);
+    nodes=[master,src,lfo,lfo2,drone];
+    // bubbles
+    const bubble=()=>{
+      if(!on) return;
+      const o=ctxA.createOscillator(), g=ctxA.createGain();
+      const f0=rnd(320,900);
+      o.type='sine'; o.frequency.setValueAtTime(f0,ctxA.currentTime);
+      o.frequency.exponentialRampToValueAtTime(f0*rnd(.35,.6),ctxA.currentTime+.16);
+      g.gain.setValueAtTime(0,ctxA.currentTime);
+      g.gain.linearRampToValueAtTime(rnd(.02,.05),ctxA.currentTime+.02);
+      g.gain.exponentialRampToValueAtTime(.0001,ctxA.currentTime+.24);
+      o.connect(g); g.connect(master); o.start(); o.stop(ctxA.currentTime+.3);
+      bubbleTimer=setTimeout(bubble, rnd(1400,5200));
+    };
+    bubbleTimer=setTimeout(bubble,1200);
+  }
+  function stop(){
+    clearTimeout(bubbleTimer);
+    if(ctxA){ const m=nodes[0]; m.gain.cancelScheduledValues(ctxA.currentTime); m.gain.linearRampToValueAtTime(0,ctxA.currentTime+.5);
+      setTimeout(()=>{ try{ctxA.close()}catch(e){} ctxA=null },700) }
+  }
+  btn.addEventListener('click',()=>{
+    on=!on;
+    btn.classList.toggle('on',on);
+    btn.setAttribute('aria-label',on?'Turn off ocean sound':'Turn on ocean sound');
+    mut.style.opacity=on?0:1; wv.style.opacity=on?1:.45;
+    if(on) start(); else stop();
+  });
+})();
+
+/* ============================================================
+   15.5 · LETTER-BY-LETTER HEADING REVEAL
+   ============================================================ */
+(function heroTitle(){
+  const h=$('#heroTitle');
+  if(!h) return;
+  let i=0;
+  h.innerHTML=['THE WAY','OF WATER'].map((w,wi)=>
+    `<span class="${wi?'word2':'word1'}" aria-hidden="true" style="display:block">${
+      w.split('').map(ch=>`<span class="ltr" style="--i:${i++}">${ch===' '?'&nbsp;':ch}</span>`).join('')
+    }</span>`).join('');
+})();
+
+/* ============================================================
+   16 · FINALE: reveal + smooth anchors
+   ============================================================ */
+observeReveals();
+document.addEventListener('click',e=>{
+  const a=e.target.closest('a[href^="#"]');
+  if(!a) return;
+  const id=a.getAttribute('href');
+  if(id.length<2) return;
+  const t=document.querySelector(id);
+  if(t){ e.preventDefault(); t.scrollIntoView({behavior:REDUCED?'auto':'smooth',block:'start'}) }
+});
+</script>
+</body>
+</html>
